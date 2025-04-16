@@ -1,6 +1,7 @@
 import 'package:crafty_bay/features/ui/widget/app_logo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../../app/utils/constants/color.dart';
 import '../../../../../app/utils/sizes.dart';
@@ -15,6 +16,18 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Logger().i("User signed in successfully");
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
