@@ -1,8 +1,9 @@
+
+
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
 class NetworkResponse {
@@ -21,22 +22,41 @@ class NetworkResponse {
 
 class NetworkCaller {
   final Logger _logger = Logger();
+
   Future<NetworkResponse> getRequest({required String url}) async {
     try {
       Uri uri = Uri.parse(url);
-      _logger.i("Uri = $url");
-      var response = await http.get(uri);
-      if (response.statusCode == 200) {
-        final decodedData = jsonDecode(response.body);
+    Map<String, String> headers = {'token': 'token'};
+
+    ///log request
+    _logRequest(url, null, headers);
+
+      debugPrint("Uri =============== $url"); // Use debugPrint for
+
+
+
+  Response response = await get(uri,headers: headers);
+
+      ///log response
+      _logResponse(url, response);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final decodedResponse = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: true,
-          responseData: decodedData,
+          responseData: decodedResponse,
         );
-      } else {
+      }
+      else if(response.statusCode == 401){
       return  NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: false);
+      }
+      else {
+        return  NetworkResponse(
+            statusCode: response.statusCode,
+            isSuccess: false);
       }
     } catch (e) {
       return NetworkResponse(
@@ -49,9 +69,18 @@ class NetworkCaller {
   }
 
   Future<NetworkResponse> postRequest({required String url,required Map<String,dynamic>body})async{
-    Uri uri = Uri.parse(url);
-    var response = await http.post(uri,body: body);
-   try{ if(response.statusCode==200){
+
+       try{
+
+         Uri uri = Uri.parse(url);
+         Map <String,String> headers = {'content-type':'application/json','token': 'token'};
+         _logRequest(url, body, headers);
+
+         Response response = await post(uri,
+             headers: headers,
+             body: body);
+           _logResponse(url, response);
+         if(response.statusCode==200){
      final decodedData = jsonDecode(response.body);
      return NetworkResponse(
        statusCode: response.statusCode,
@@ -72,4 +101,15 @@ class NetworkCaller {
      );
    }
   }
+
+
+  void _logRequest(String url, Map<String, dynamic> ?requestBody,Map<String, String> headers){
+  _logger.i("Request: URL: $url,\nBody: $requestBody,\nHeaders: $headers");
+  }
+
+
+void _logResponse(String url, Response response){
+  _logger.i("Url: $url,\n StatusCode: ${response.statusCode},\nBody:"
+      " ${response.body}\n headers:  ${response.headers},");
+}
 }

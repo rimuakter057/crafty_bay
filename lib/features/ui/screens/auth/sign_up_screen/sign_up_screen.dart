@@ -1,6 +1,8 @@
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../app/utils/constants/color.dart';
 import '../../../../../app/utils/sizes.dart';
@@ -42,6 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildForm(TextTheme textTheme) {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
       child: Column(
         children: [
@@ -63,6 +66,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(hintText: "email"),
+              validator: (String? value) {
+                String email = value ?? '';
+                if (!EmailValidator.validate(email)) {
+                  return 'Enter a valid email';
+                }
+                return null;
+              }
+
+
+
           ),
           const SizedBox(height: 8),
           TextFormField(
@@ -84,6 +97,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(hintText: "phone"),
+            validator: (String? value) {
+              String phoneNumber = value ?? '';
+              RegExp regExp = RegExp(r'^(?:\+88|88)?01[3-9]\d{8}$');
+              if (regExp.hasMatch(phoneNumber) == false) {
+                return 'Enter your valid phone number';
+              }
+              return null;
+            },
+
+
+
+
+
           ),
           const SizedBox(height: 8),
           TextFormField(
@@ -132,13 +158,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void _onTapSignUpButton() {
-    Navigator.pushNamed(context, VerifyOtpScreen.name);
-  }
 
   void _onTapSignInButton() {
     Navigator.pop(context);
   }
+
+
+
+  Future<void> _onTapSignUpButton() async {
+    if (_formKey.currentState!.validate()){
+      final email = _emailTEController.text.trim();
+      final firstName = _firstNameTEController.text.trim();
+      final lastName = _lastNameTEController.text.trim();
+      final phone = _phoneTEController.text.trim();
+      final password = _passwordTEController.text.trim();
+      final deliveryAddress = _deliveryAddressTEController.text.trim();
+      print("$email, $firstName, $lastName, $phone, $password, $deliveryAddress");
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   @override
   void dispose() {
