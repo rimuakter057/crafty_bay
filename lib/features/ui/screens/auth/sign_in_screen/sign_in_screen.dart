@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 
 import '../../../../../app/utils/constants/color.dart';
 import '../../../../../app/utils/sizes.dart';
+import '../../../common/screens/main_bottom_nav_screen.dart';
 import '../sign_up_screen/sign_up_screen.dart';
 
 
@@ -63,7 +64,10 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+
+                  Navigator.pushNamed(context, MainBottomNavBarScreen.name);
+                },
                 child: Text("sign in"),
               ),
               const SizedBox(height: 24),

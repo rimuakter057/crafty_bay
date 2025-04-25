@@ -1,4 +1,7 @@
 
+import 'package:crafty_bay/core/widgets/center_circular_indicator.dart';
+import 'package:crafty_bay/features/ui/data/auth/controller/sign_up_controller.dart';
+import 'package:crafty_bay/features/ui/data/auth/models/sign_up_model.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../../../app/utils/constants/color.dart';
 import '../../../../../app/utils/sizes.dart';
+import '../../../../../core/widgets/show_snack_bar.dart';
 import '../../../widget/app_logo.dart';
 import '../verifyOtpScreen/verify_otp_screen.dart';
 
@@ -24,9 +28,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _lastNameTEController = TextEditingController();
   final TextEditingController _phoneTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
-  final TextEditingController _deliveryAddressTEController =
-  TextEditingController();
+  final TextEditingController _deliveryAddressTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final SignUpController signUpController = Get.find<SignUpController>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +92,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           const SizedBox(height: 8),
           TextFormField(
+            validator: (String?value){
+              if(value?.trim().isEmpty??true){
+                return 'Enter your address';
+              }
+              return null;
+            },
             controller: _lastNameTEController,
             textInputAction: TextInputAction.next,
             decoration:
@@ -93,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           const SizedBox(height: 8),
           TextFormField(
-            controller: _phoneTEController,
+              controller: _phoneTEController,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(hintText: "phone"),
@@ -114,27 +126,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
           const SizedBox(height: 8),
           TextFormField(
             controller: _passwordTEController,
-            decoration:
-            InputDecoration(hintText:"password"),
+            decoration: InputDecoration(hintText:"password"),
+            validator: (String?value){
+              if(value!.isEmpty){
+                return 'Enter your password';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 8),
           TextFormField(
             controller: _deliveryAddressTEController,
             textInputAction: TextInputAction.next,
             maxLines: 3,
+            validator: (String?value){
+              if(value?.trim().isEmpty??true){
+                return 'Enter your address';
+              }
+              return null;
+            },
             decoration: InputDecoration(
               hintText: "delivery address",
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 16,
               ),
+
             ),
           ),
           const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: _onTapSignUpButton,
-            child: Text("sign up"),
+          // sign up
+
+          GetBuilder<SignUpController>(
+            builder: (controller) {
+              return Visibility(
+                visible: controller.inProgress==false,
+                replacement:CenterCircularIndicator(),
+                child: ElevatedButton(
+                  onPressed: _onTapSignUpButton,
+                  child: Text("sign up"),
+                ),
+              );
+            }
           ),
+
           const SizedBox(height: 24),
           RichText(
             text: TextSpan(
@@ -167,13 +202,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _onTapSignUpButton() async {
     if (_formKey.currentState!.validate()){
-      final email = _emailTEController.text.trim();
-      final firstName = _firstNameTEController.text.trim();
-      final lastName = _lastNameTEController.text.trim();
-      final phone = _phoneTEController.text.trim();
-      final password = _passwordTEController.text.trim();
-      final deliveryAddress = _deliveryAddressTEController.text.trim();
-      print("$email, $firstName, $lastName, $phone, $password, $deliveryAddress");
+      SignUpModel signUpModel = SignUpModel(
+        firstName: _firstNameTEController.text.trim(),
+        lastName: _lastNameTEController.text.trim(),
+        email: _emailTEController.text.trim(),
+        password: _passwordTEController.text,
+        phone: _phoneTEController.text.trim(),
+        deliveryAddress: _deliveryAddressTEController.text.trim(),
+      );
+  final bool isSuccess = await signUpController.signUp(signUpModel);
+       if(isSuccess){
+     Navigator.pushNamed(context, VerifyOtpScreen.name);
+   }else{
+     showSnackBar(context, 'Something went wrong');
+   }
     }
   }
 

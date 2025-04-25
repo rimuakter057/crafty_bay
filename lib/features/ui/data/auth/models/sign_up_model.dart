@@ -1,3 +1,9 @@
+
+
+
+
+
+
 class SignUpModel {
   final String email;
   final String firstName;
@@ -6,34 +12,24 @@ class SignUpModel {
   final String password;
   final String deliveryAddress;
 
-  //named constructor
-  SignUpModel({
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.phone,
-    required this.password,
-    required this.deliveryAddress,
-  });
+  SignUpModel(
+      {required this.email,
+        required this.firstName,
+        required this.lastName,
+        required this.phone,
+        required this.password,
+        required this.deliveryAddress});
 
-// factory constructor
-
-  Map<String,dynamic> toMap(){
+  Map<String, dynamic> toJson() {
     return {
       "first_name": firstName,
       "last_name": lastName,
       "email": email,
       "password": password,
       "phone": phone,
-      "city": deliveryAddress
+      "city": deliveryAddress,
     };
   }
-
-
-
-
-
-
-
 }
+
 
