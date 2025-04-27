@@ -2,6 +2,7 @@
 import 'package:crafty_bay/core/widgets/center_circular_indicator.dart';
 import 'package:crafty_bay/features/ui/data/auth/controller/sign_up_controller.dart';
 import 'package:crafty_bay/features/ui/data/auth/models/sign_up_model.dart';
+import 'package:crafty_bay/features/ui/screens/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -195,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
   void _onTapSignInButton() {
-    Navigator.pop(context);
+   Get.toNamed(SignInScreen.name);
   }
 
 

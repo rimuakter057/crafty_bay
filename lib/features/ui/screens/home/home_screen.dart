@@ -30,7 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               _buildSearchTextField(),
               const SizedBox(height: 16),
+
               const HomeCarouselSlider(),
+
+
               const SizedBox(height: 16),
               SectionHeader(
                 title: "Categories",

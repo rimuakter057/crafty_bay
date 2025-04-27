@@ -1,6 +1,10 @@
+import 'package:crafty_bay/core/widgets/show_snack_bar.dart';
+import 'package:crafty_bay/features/ui/data/auth/controller/sign_in_controller.dart';
+import 'package:crafty_bay/features/ui/data/auth/models/sign_in_request_model.dart';
 import 'package:crafty_bay/features/ui/widget/app_logo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../app/utils/constants/color.dart';
@@ -17,7 +21,9 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
+  final TextEditingController _emailTEController = TextEditingController();
+  final TextEditingController _passwordTEController = TextEditingController();
+ final SignInController _signInController = Get.find<SignInController>();
   @override
   void initState() {
     // TODO: implement initState
@@ -53,11 +59,13 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: _emailTEController,
                 decoration:
                 InputDecoration(hintText:"email"),
               ),
               const SizedBox(height: 8),
               TextFormField(
+                controller: _passwordTEController,
                 obscureText: true,
                 decoration:
                 InputDecoration(hintText: "password"),
@@ -65,9 +73,8 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-
-                  Navigator.pushNamed(context, MainBottomNavBarScreen.name);
-                },
+                  _onTapSignInButton();
+                                 },
                 child: Text("sign in"),
               ),
               const SizedBox(height: 24),
@@ -95,7 +102,32 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
+
+  void _onTapSignInButton()async {
+  SignInRequestModel signInRequestModel =SignInRequestModel(
+      email: _emailTEController.text.trim(),
+      password: _passwordTEController.text);
+  final bool isSuccess= await _signInController.signIn(signInRequestModel);
+  if(isSuccess){
+    Get.offAllNamed(MainBottomNavBarScreen.name);
+  }else{
+    showSnackBar(context, _signInController.errorMessage!, true);
+  }
+
+
+  }
+
+
+
   void _onTapSignUpButton() {
     Navigator.pushNamed(context, SignUpScreen.name);
   }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _emailTEController.dispose();
+    _passwordTEController.dispose();
+  }
+
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../features/ui/common/screens/main_bottom_nav_screen.dart';
+import '../features/ui/screens/auth/splash_screen/splash_screen.dart';
 import 'controller_binder.dart';
 
 
@@ -19,7 +20,7 @@ class CraftyBay extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme:AppTheme.lightTheme,
-      initialRoute: SignUpScreen.name,
+      initialRoute: SplashScreen.name,
       onGenerateRoute: AppRoutes.onGenerateRoute,
       initialBinding: ControllerBinder(),
     );
