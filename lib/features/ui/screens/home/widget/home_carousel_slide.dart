@@ -26,46 +26,45 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
         return Column(
           children: [
             Visibility(
-              visible: controller.getSliderInProgress==false,
-              replacement: SizedBox(
-                  height: 200,
-                  child: const Center(child: CircularProgressIndicator())),
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  height: 200.0,
-                  viewportFraction: 0.9,
-                  onPageChanged: (index, reason) {
-                    _selectedSlider = index;
-                    setState(() {});
-                  },
-                ),
-                items:controller.sliders.map((slider) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 2),
-                        decoration: BoxDecoration(
-                          color: AppColors.themeColor,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      /*    image: DecorationImage(
-                              image: NetworkImage(slider.photoUrl),
-                              fit: BoxFit.cover),
-                        );
-                          */
-
-
-                        child: Center(
-                          child: Text(
-                            'text slider.title',
-                            style: const TextStyle(fontSize: 16.0),
-                          ),
-                        ),
-                      );
+              visible:controller.sliders.isNotEmpty,
+              child: Visibility(
+                visible: controller.getSliderInProgress==false,
+                replacement: SizedBox(
+                    height: 200,
+                    child: const Center(child: CircularProgressIndicator())),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200.0,
+                    viewportFraction: 0.9,
+                    onPageChanged: (index, reason) {
+                      _selectedSlider = index;
+                      setState(() {});
                     },
-                  );
-                }).toList(),
+                  ),
+                  items:controller.sliders.map((slider) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          decoration: BoxDecoration(
+                            color: AppColors.themeColor,
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                                image: NetworkImage(slider.photoUrl),
+                            )
+                          ),
+                          child: Center(
+                            child: Text(
+                              slider.description,
+                              style: const TextStyle(fontSize: 16.0,color: Colors.grey),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
               ),
             ),
             const SizedBox(height: 8),
