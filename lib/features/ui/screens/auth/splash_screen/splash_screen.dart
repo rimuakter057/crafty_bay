@@ -15,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+/*
   @override
   void initState() {
     super.initState();
@@ -25,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
     Navigator.pushReplacementNamed(context, MainBottomNavBarScreen.name);
   }
+*/
 
 
 

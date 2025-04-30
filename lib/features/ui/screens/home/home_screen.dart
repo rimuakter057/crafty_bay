@@ -1,4 +1,7 @@
 
+import 'package:crafty_bay/core/widgets/center_circular_indicator.dart';
+import 'package:crafty_bay/features/ui/common/controllers/category_controller.dart';
+import 'package:crafty_bay/features/ui/common/model/category_model.dart';
 import 'package:crafty_bay/features/ui/screens/home/widget/appbar_action_button.dart';
 import 'package:crafty_bay/features/ui/screens/home/widget/home_carousel_slide.dart';
 import 'package:crafty_bay/features/ui/screens/home/widget/section_header.dart';
@@ -86,18 +89,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCategoriesSection() {
-    return const SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-          CategoryItem(),
-        ],
-      ),
+    return  GetBuilder<CategoryController>(
+      builder: (controller) {
+        if(controller.isInitialLoading){
+          return SizedBox(
+              height: 100,
+              child: CenterCircularIndicator());
+        }
+
+        List <CategoryModel> list = controller.categoryList.length>10?
+            controller.categoryList.sublist(0,10):controller.categoryList;
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children:list.map((e){
+              return CategoryItem(categoryModel: e);
+            }).toList(),
+          ),
+        );
+      }
     );
   }
 

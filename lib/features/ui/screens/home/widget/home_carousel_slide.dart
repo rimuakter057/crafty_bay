@@ -26,14 +26,15 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
         return Column(
           children: [
             Visibility(
-              visible:controller.sliders.isNotEmpty,
+              visible: controller.getSliderInProgress==false,
+              replacement: SizedBox(
+                  height: 200,
+                  child: const Center(child: CircularProgressIndicator())),
               child: Visibility(
-                visible: controller.getSliderInProgress==false,
-                replacement: SizedBox(
-                    height: 200,
-                    child: const Center(child: CircularProgressIndicator())),
+                visible: controller.sliders.isNotEmpty,
                 child: CarouselSlider(
                   options: CarouselOptions(
+                    autoPlay: true,
                     height: 200.0,
                     viewportFraction: 0.9,
                     onPageChanged: (index, reason) {

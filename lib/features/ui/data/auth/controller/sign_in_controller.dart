@@ -4,7 +4,7 @@ import 'package:crafty_bay/app/app_urls.dart';
 import 'package:crafty_bay/core/network_caller/network_caller.dart';
 import 'package:crafty_bay/features/ui/data/auth/controller/auth_controller.dart';
 import 'package:crafty_bay/features/ui/data/auth/models/sign_in_request_model.dart';
-import 'package:crafty_bay/features/ui/data/auth/models/user_model.dart';
+import 'package:crafty_bay/features/ui/data/home/model/user_model.dart';
 import 'package:get/get.dart';
 
 class SignInController extends GetxController{

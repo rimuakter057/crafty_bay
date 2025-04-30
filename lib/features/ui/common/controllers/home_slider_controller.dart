@@ -1,7 +1,7 @@
 import 'package:crafty_bay/app/app_urls.dart';
 import 'package:crafty_bay/core/network_caller/network_caller.dart';
 import 'package:get/get.dart';
-import '../../data/auth/models/slide_model.dart';
+import '../../data/home/model/slide_model.dart';
 
 class HomeSliderController extends GetxController{
   bool _getSliderInProgress = false;
