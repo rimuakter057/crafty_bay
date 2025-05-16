@@ -7,4 +7,6 @@ class AppUrls{
   static const String slider = "$_baseUrl/slides";
   static const String categoryList = "$_baseUrl/categories";
   static const String productList = "$_baseUrl/products";
+  static const String addToCart = "$_baseUrl/cart";
+  static  String productDetails(String productId) => "$_baseUrl/products/id/$productId";
 }

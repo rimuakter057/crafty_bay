@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/features/ui/common/model/category_model.dart';
 import 'package:crafty_bay/features/ui/screens/auth/sign_up_screen/sign_up_screen.dart';
 import 'package:crafty_bay/features/ui/screens/auth/verifyOtpScreen/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +29,11 @@ class AppRoutes {
     } else if (settings.name == MainBottomNavBarScreen.name) {
       route = const MainBottomNavBarScreen();
     } else if (settings.name == ProductListScreen.name) {
-      final String category = settings.arguments as String;
+      final category = settings.arguments as CategoryModel;
       route = ProductListScreen(category: category);
     } else if (settings.name == ProductDetailsScreen.name) {
-      route = const ProductDetailsScreen();
+      final productId = settings.arguments as String;
+      route =  ProductDetailsScreen(productId: productId,);
     }
 
     return MaterialPageRoute(builder: (context) {

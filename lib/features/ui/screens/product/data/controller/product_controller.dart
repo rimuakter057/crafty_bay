@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../model/product_model.dart';
 
-class ProductController extends GetxController{
+class ProductListController extends GetxController{
   final int _perPageDataCount=15;
    int _currentPage=0;
    int ? _totalPage;

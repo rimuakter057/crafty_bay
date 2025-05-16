@@ -7,8 +7,10 @@ import '../../../../../app/utils/constants/color.dart';
 
 class ProductImageCarouselSlider extends StatefulWidget {
   const ProductImageCarouselSlider({
-    super.key,
+    super.key, required this.imageList,
   });
+
+  final List<String> imageList;
 
   @override
   State<ProductImageCarouselSlider> createState() => _ProductImageCarouselSliderState();
@@ -30,19 +32,10 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
               setState(() {});
             },
           ),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.imageList.map((image) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.grey,
-                  child: Center(
-                    child: Text(
-                      'Image $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ),
-                  ),
-                );
+                return Image.network(image,fit: BoxFit.cover,);
               },
             );
           }).toList(),
@@ -54,7 +47,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int i = 0; i < 5; i++)
+              for (int i = 0; i < widget.imageList.length; i++)
                 Container(
                   height: 16,
                   width: 16,

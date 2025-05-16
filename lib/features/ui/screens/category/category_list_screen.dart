@@ -28,7 +28,6 @@ void _loadMoreData(){
     if(_ScrollController.position.extentAfter<300){
       _categoryController.getCategoryList();
     }
-
 }
 
 
@@ -59,18 +58,23 @@ void _loadMoreData(){
               child: Column(
                 children: [
                   Expanded(
-                    child: GridView.builder(
-                      controller: _ScrollController,
-                      itemCount: controller.categoryList.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        mainAxisSpacing: 16,
-                      ),
-                      itemBuilder: (context, index) {
-                        return  FittedBox(child: CategoryItem(
-                          categoryModel:controller.categoryList[index] ,
-                        ));
+                    child: RefreshIndicator(
+                      onRefresh: ()async{
+                        controller.refreshList();
                       },
+                      child: GridView.builder(
+                        controller: _ScrollController,
+                        itemCount: controller.categoryList.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          mainAxisSpacing: 16,
+                        ),
+                        itemBuilder: (context, index) {
+                          return  FittedBox(child: CategoryItem(
+                            categoryModel:controller.categoryList[index] ,
+                          ));
+                        },
+                      ),
                     ),
                   ),
                   Visibility(

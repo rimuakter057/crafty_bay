@@ -16,13 +16,14 @@ class CategoryController extends GetxController{
  List <CategoryModel> get categoryList => _categoryList;
  bool get isInitialLoading => _isInitialLoading;
   bool get isLoadMoreInProgress => _isLoadMoreInProgress;
+
   Future<bool> getCategoryList()async{
     if (_totalPage != null && _currentPage > _totalPage!) {
       return true;
     }
-
             bool isSuccess=false;
        _currentPage++;
+
     if(!_isInitialLoading){
       _isLoadMoreInProgress=true;
     }

@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/features/ui/screens/product/data/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/utils/asset_path.dart';
@@ -7,14 +8,16 @@ import '../screens/product/screens/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key,
+    super.key, required this.productModel,
   });
-
+final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ProductDetailsScreen.name);
+        Navigator.pushNamed(context, ProductDetailsScreen.name,
+        arguments: productModel.id
+        );
       },
       child: Card(
         color: Colors.white,
@@ -31,17 +34,18 @@ class ProductCard extends StatelessWidget {
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
-                  image: DecorationImage(
-                      image: AssetImage(AssetPath.appLogoPng),
-                      fit: BoxFit.scaleDown),
+                  image:productModel.photos.isNotEmpty? DecorationImage(
+                      image: NetworkImage(productModel.photos.first),
+                      fit: BoxFit.scaleDown):null,
                 ),
+                child: productModel.photos.isEmpty?Icon(Icons.error):null,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    const Text(
-                      'Nike NK76 - new collection',
+                     Text(
+                    productModel.title,
                       maxLines: 1,
                       style: TextStyle(
                         overflow: TextOverflow.ellipsis,
@@ -51,8 +55,8 @@ class ProductCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          '100৳',
+                         Text(
+                          '${productModel.currentPrice}',
                           style: TextStyle(
                               color: AppColors.themeColor,
                               fontWeight: FontWeight.w600),
