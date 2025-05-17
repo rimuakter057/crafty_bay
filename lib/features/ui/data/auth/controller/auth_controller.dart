@@ -44,7 +44,9 @@ class AuthController{
     await  sharedPreferences.clear();
     token=null;
     user=null;
-
+  }
+  bool isValidUser(){
+    return token !=null;
   }
 
 }

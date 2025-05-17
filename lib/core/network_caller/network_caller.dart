@@ -1,10 +1,11 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart' as getx;
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
+
+import '../../features/ui/data/auth/controller/auth_controller.dart';
 
 class NetworkResponse {
   final int statusCode;
@@ -23,25 +24,27 @@ class NetworkResponse {
 class NetworkCaller {
   final Logger _logger = Logger();
 
-  Future<NetworkResponse> getRequest({required String url, Map<String, dynamic>? queryParams}) async {
+  Future<NetworkResponse> getRequest({
+    required String url,
+    Map<String, dynamic>? queryParams,
+  }) async {
     try {
-url+= '?';
-for(String key in queryParams?.keys??{}){
-  url += '$key=${queryParams?[key]}&';
-}
-
+      url += '?';
+      for (String key in queryParams?.keys ?? {}) {
+        url += '$key=${queryParams?[key]}&';
+      }
 
       Uri uri = Uri.parse(url);
-    Map<String, String> headers = {'token': 'token'};
+      Map<String, String> headers = {
+        'token': ''
+      };
 
-    ///log request
-    _logRequest(url, null, headers);
+      ///log request
+      _logRequest(url, null, headers);
 
-      debugPrint("Uri =============== $url"); // Use debugPrint for
+      debugPrint("Uri =============== $url");
 
-
-
-  Response response = await get(uri,headers: headers);
+      Response response = await get(uri, headers: headers);
 
       ///log response
       _logResponse(url, response);
@@ -53,100 +56,65 @@ for(String key in queryParams?.keys??{}){
           isSuccess: true,
           responseData: decodedResponse,
         );
-      }
-      else if(response.statusCode == 401){
-      return  NetworkResponse(
+      } else if (response.statusCode == 401) {
+        return NetworkResponse(
           statusCode: response.statusCode,
-          isSuccess: false);
-      }
-      else {
-        return  NetworkResponse(
-            statusCode: response.statusCode,
-            isSuccess: false);
+          isSuccess: false,
+        );
+      } else {
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+        );
       }
     } catch (e) {
       return NetworkResponse(
         statusCode: -1,
         isSuccess: false,
         errorMessage: e.toString(),
-
       );
     }
   }
 
-  Future<NetworkResponse> postRequest({required String url, Map<String,dynamic>?body})async{
 
-       try{
-
-         Uri uri = Uri.parse(url);
-         Map <String,String> headers = {'content-type':'application/json',
-           'token': 'token'};
-         _logRequest(url, body, headers);
-
-         Response response = await post(uri,
-             headers: headers,
-             body:jsonEncode(body) );
-           _logResponse(url, response);
-
-         final decodedResponse = jsonDecode(response.body);
-         if(response.statusCode==200 || response.statusCode==201){
-
-     return NetworkResponse(
-       statusCode: response.statusCode,
-       isSuccess: true,
-       responseData: decodedResponse,
-     );
-   }
-         else if(response.statusCode == 401){
-           return  NetworkResponse(
-               statusCode: response.statusCode,
-               isSuccess: false,
-               errorMessage: decodedResponse['msg']
-           );
-         }
-         else{
-     return NetworkResponse(statusCode:response.statusCode ,
-         isSuccess: false,
-     errorMessage: decodedResponse['msg'],
-     );
-   }
-
-   }
-   catch(e){
-     return NetworkResponse(
-       statusCode: -1,
-       isSuccess: false,
-       errorMessage: e.toString(),
-     );
-   }
-  }
-
-  Future<NetworkResponse> patchRequest({required String url,required Map<String,dynamic>body})async{
-
-    try{
-
+  Future<NetworkResponse> postRequest({
+    required String url,
+    Map<String, dynamic>? body,
+  }) async {
+    try {
       Uri uri = Uri.parse(url);
-      Map <String,String> headers = {'content-type':'application/json','token': 'token'};
+      Map<String, String> headers = {
+        'content-type': 'application/json',
+        'token': '',
+      };
       _logRequest(url, body, headers);
-
-      Response response = await patch(uri,
-          headers: headers,
-          body: body);
+      Response response = await post(
+        uri,
+        headers: headers,
+        body: jsonEncode(body),
+      );
       _logResponse(url, response);
-      if(response.statusCode==200){
-        final decodedData = jsonDecode(response.body);
+      final decodedResponse = jsonDecode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: true,
-          responseData: decodedData,
+          responseData: decodedResponse,
         );
-      }else{
-        return NetworkResponse(statusCode:response.statusCode ,
-            isSuccess: false);
+      } else if (response.statusCode == 401) {
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+          errorMessage: decodedResponse['msg'],
+        );
+      } else {
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+          errorMessage: decodedResponse['msg'],
+        );
       }
-
-    }
-    catch(e){
+    } catch (e) {
       return NetworkResponse(
         statusCode: -1,
         isSuccess: false,
@@ -155,32 +123,34 @@ for(String key in queryParams?.keys??{}){
     }
   }
 
-  Future<NetworkResponse> deleteRequest({required String url,required Map<String,dynamic>body})async{
-
-    try{
-
+  Future<NetworkResponse> patchRequest({
+    required String url,
+    required Map<String, dynamic> body,
+  }) async {
+    try {
       Uri uri = Uri.parse(url);
-      Map <String,String> headers = {'content-type':'application/json','token': 'token'};
+      Map<String, String> headers = {
+        'content-type': 'application/json',
+        'token': 'token',
+      };
       _logRequest(url, body, headers);
 
-      Response response = await delete(uri,
-          headers: headers,
-          body: body);
+      Response response = await patch(uri, headers: headers, body: body);
       _logResponse(url, response);
-      if(response.statusCode==200){
+      if (response.statusCode == 200) {
         final decodedData = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: true,
           responseData: decodedData,
         );
-      }else{
-        return NetworkResponse(statusCode:response.statusCode ,
-            isSuccess: false);
+      } else {
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+        );
       }
-
-    }
-    catch(e){
+    } catch (e) {
       return NetworkResponse(
         statusCode: -1,
         isSuccess: false,
@@ -189,14 +159,58 @@ for(String key in queryParams?.keys??{}){
     }
   }
 
+  Future<NetworkResponse> deleteRequest({
+    required String url,
+    required Map<String, dynamic> body,
+  }) async {
+    try {
+      Uri uri = Uri.parse(url);
+      Map<String, String> headers = {
+        'content-type': 'application/json',
+        'token': 'token',
+      };
+      _logRequest(url, body, headers);
 
-  void _logRequest(String url, Map<String, dynamic> ?requestBody,Map<String, String> headers){
-  _logger.i("Request: URL: $url,\nBody: $requestBody,\nHeaders: $headers");
+      Response response = await delete(uri, headers: headers, body: body);
+      _logResponse(url, response);
+      if (response.statusCode == 200) {
+        final decodedData = jsonDecode(response.body);
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: true,
+          responseData: decodedData,
+        );
+      } else {
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+        );
+      }
+    } catch (e) {
+      return NetworkResponse(
+        statusCode: -1,
+        isSuccess: false,
+        errorMessage: e.toString(),
+      );
+    }
   }
 
+  void _logRequest(
+    String url,
+    Map<String, dynamic>? requestBody,
+    Map<String, String> headers,
+  ) {
+    _logger.i("Request: URL: $url,\nBody: $requestBody,\nHeaders: $headers");
+  }
 
-void _logResponse(String url, Response response){
-  _logger.i("Url: $url,\n StatusCode: ${response.statusCode},\nBody:"
-      " ${response.body}\n headers:  ${response.headers},");
-}
+  void _logResponse(String url, Response response) {
+    _logger.i(
+      "Url: $url,\n StatusCode: ${response.statusCode},\nBody:"
+      " ${response.body}\n headers:  ${response.headers},",
+    );
+  }
+  Future<void> _clearUserData() async {
+    await getx.Get.find<AuthController>().clearUserData();
+  }
+
 }

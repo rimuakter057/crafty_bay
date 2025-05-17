@@ -20,7 +20,7 @@ class ProductDetailsController extends GetxController{
     update();
     final NetworkResponse response = await Get.find<NetworkCaller>().getRequest(url: AppUrls.productDetails(productId));
     if(response.isSuccess){
-      _productModel=ProductModel.fromJson(response.responseData!['data']['product']);
+      _productModel=ProductModel.fromJson(response.responseData!['data']);
       _errorMessage=null;
       isSuccess=true;
     }else{
