@@ -36,7 +36,7 @@ class NetworkCaller {
 
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
-        'token': ''
+        'token':getx.Get.find<AuthController>().token??'',
       };
 
       ///log request
@@ -85,7 +85,7 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'content-type': 'application/json',
-        'token': '',
+        'token':getx.Get.find<AuthController>().token??'',
       };
       _logRequest(url, body, headers);
       Response response = await post(
@@ -131,7 +131,7 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'content-type': 'application/json',
-        'token': 'token',
+        'token':getx.Get.find<AuthController>().token??'',
       };
       _logRequest(url, body, headers);
 
@@ -167,7 +167,7 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'content-type': 'application/json',
-        'token': 'token',
+        'token':getx.Get.find<AuthController>().token??'',
       };
       _logRequest(url, body, headers);
 

@@ -4,7 +4,6 @@ import 'package:crafty_bay/features/ui/common/controllers/add_to_cart_controller
 import 'package:crafty_bay/features/ui/screens/product/data/controller/product_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../../../../app/utils/constants/color.dart';
 import '../../../data/auth/controller/auth_controller.dart';
 import '../../auth/sign_in_screen/sign_in_screen.dart';
@@ -127,6 +126,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ],
                             ),
                             const SizedBox(height: 16),
+                            // if (controller.productModel.colors.isNotEmpty)
+                            //   Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       const SizedBox(height: 16),
+                            //       ColorPicker(
+                            //         colors: controller.productModel.colors,
+                            //         onChange: (selectedColor) {
+                            //           _selectedColor = selectedColor;
+                            //         },
+                            //       ),
+                            //     ],
+                            //   ),
+
+
                             ColorPicker(
                               colors: controller.productModel.colors,
                               // colors: const ['Red', 'White', 'Black', 'Pink'],
@@ -135,6 +149,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               },
                             ),
                             const SizedBox(height: 16),
+                            // Visibility(
+                            //   visible: controller.productModel.sizes.isNotEmpty,
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       const SizedBox(height: 16),
+                            //       SizePicker(
+                            //         sizes: controller.productModel.sizes,
+                            //         onChange: (selectedSize) {
+                            //           _selectedSize = selectedSize;
+                            //         },
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             SizePicker(
                               sizes: controller.productModel.sizes,
                               // sizes: const ['S', 'M', 'L', 'XL'],
@@ -230,7 +259,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       final bool isSuccess = await _addToCartController
                           .addToCart(_productDetailsController.productModel.id);
 
-
                       if (isSuccess) {
                         showSnackBar(context, "add to cart");
                       } else {
@@ -251,6 +279,4 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
     );
   }
-
-
 }
