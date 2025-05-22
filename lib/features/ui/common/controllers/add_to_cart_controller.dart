@@ -17,7 +17,7 @@ class AddToCartController extends GetxController{
     update();
     final NetworkResponse response = await Get.find<NetworkCaller>().
     postRequest(
-        url: AppUrls.addToCart,
+        url: AppUrls.cartListUrl,
     body: {
           'product':productId
     }

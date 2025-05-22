@@ -8,6 +8,7 @@ import '../core/network_caller/network_caller.dart';
 import '../features/ui/common/controllers/main_bottom_nav_controller.dart';
 import '../features/ui/data/auth/controller/sign_in_controller.dart';
 import '../features/ui/data/auth/controller/veify_otp_controller.dart';
+import '../features/ui/screens/cart/ui/controller/cart_list_controller.dart';
 
 class ControllerBinder extends Bindings {
   @override
@@ -20,6 +21,6 @@ class ControllerBinder extends Bindings {
     Get.put(SignUpController());
     Get.put(SignInController());
     Get.put(VerifyOtpController());
-
+    Get.put(CartListController());
   }
 }

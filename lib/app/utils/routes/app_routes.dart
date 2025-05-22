@@ -9,6 +9,7 @@ import '../../../features/ui/screens/auth/sign_in_screen/sign_in_screen.dart';
 import '../../../features/ui/screens/auth/splash_screen/splash_screen.dart';
 import '../../../features/ui/screens/product/screens/product_details_screen.dart';
 import '../../../features/ui/screens/product/screens/product_list_screen.dart';
+import '../../../features/ui/screens/reviews/ui/screens/reviews_list_screen.dart';
 
 
 
@@ -34,6 +35,8 @@ class AppRoutes {
     } else if (settings.name == ProductDetailsScreen.name) {
       final productId = settings.arguments as String;
       route =  ProductDetailsScreen(productId: productId,);
+    }else if (settings.name == ReviewsListScreen.name) {
+      route = const ReviewsListScreen();
     }
 
     return MaterialPageRoute(builder: (context) {
