@@ -22,7 +22,7 @@ class CraftyBay extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme:AppTheme.lightTheme,
-      initialRoute: ReviewsAddScreen.name,
+      initialRoute: MainBottomNavBarScreen.name,
       onGenerateRoute: AppRoutes.onGenerateRoute,
       initialBinding: ControllerBinder(),
     );

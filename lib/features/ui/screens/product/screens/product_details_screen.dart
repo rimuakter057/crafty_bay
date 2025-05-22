@@ -98,7 +98,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Get.toNamed(ReviewsAddScreen.name);
+                                              Get.toNamed(ReviewsListScreen.name,arguments: controller.productModel.id);
                                             },
                                             child: const Text('Reviews'),
                                           ),

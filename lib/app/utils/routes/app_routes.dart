@@ -39,7 +39,8 @@ class AppRoutes {
     }else if (settings.name == ReviewsAddScreen.name) {
       route = const ReviewsAddScreen();
     }else if (settings.name == ReviewsListScreen.name) {
-      route = const ReviewsListScreen();
+      final productId = settings.arguments as String;
+      route =  ReviewsListScreen(productId: productId,);
     }
 
     return MaterialPageRoute(builder: (context) {

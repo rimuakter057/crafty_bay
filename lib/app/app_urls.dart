@@ -10,7 +10,7 @@ class AppUrls{
   static const String cartListUrl = "$_baseUrl/cart";
   static const String wishlist = '$_baseUrl/wishlist';
   static const String reviewAdd = '$_baseUrl/review';
-  static  String productDetails(String productId) => "$_baseUrl/products/id/$productId";
-  static String deleteFromCartListUrl(String id) => '$_baseUrl/cart/$id';
-
+static  String productDetails(String productId) => "$_baseUrl/products/id/$productId";
+ static String deleteFromCartListUrl(String id) => '$_baseUrl/cart/$id';
+  static  String reviewList(String productId) => "$_baseUrl/review?product=$productId";
 }

@@ -1,9 +1,10 @@
+import 'package:crafty_bay/features/ui/screens/reviews/ui/data/controller/add_review_controller.dart';
 import 'package:crafty_bay/features/ui/screens/reviews/ui/screens/reviews_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReviewsAddScreen extends StatefulWidget {
-  const ReviewsAddScreen({super.key});
+  const ReviewsAddScreen({super.key, });
 
   static const String name = '/reviews';
 
@@ -14,6 +15,7 @@ class ReviewsAddScreen extends StatefulWidget {
 class _ReviewsAddScreenState extends State<ReviewsAddScreen> {
   final TextEditingController _nameController= TextEditingController();
   final TextEditingController _detailsController= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

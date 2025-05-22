@@ -2,6 +2,7 @@ import 'package:crafty_bay/features/ui/data/auth/controller/auth_controller.dart
 import 'package:crafty_bay/features/ui/common/controllers/home_slider_controller.dart';
 import 'package:crafty_bay/features/ui/data/auth/controller/sign_up_controller.dart';
 import 'package:crafty_bay/features/ui/common/controllers/category_controller.dart';
+import 'package:crafty_bay/features/ui/screens/reviews/ui/data/controller/add_review_controller.dart';
 import 'package:get/get.dart';
 
 import '../core/network_caller/network_caller.dart';
@@ -22,5 +23,6 @@ class ControllerBinder extends Bindings {
     Get.put(SignInController());
     Get.put(VerifyOtpController());
     Get.put(CartListController());
+    Get.put(ReviewsListController());
   }
 }
