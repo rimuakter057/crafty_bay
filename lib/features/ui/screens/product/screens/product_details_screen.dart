@@ -2,11 +2,13 @@ import 'package:crafty_bay/core/widgets/center_circular_indicator.dart';
 import 'package:crafty_bay/core/widgets/show_snack_bar.dart';
 import 'package:crafty_bay/features/ui/common/controllers/add_to_cart_controller.dart';
 import 'package:crafty_bay/features/ui/screens/product/data/controller/product_details_controller.dart';
+import 'package:crafty_bay/features/ui/screens/reviews/ui/screens/reviews_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../app/utils/constants/color.dart';
 import '../../../data/auth/controller/auth_controller.dart';
 import '../../auth/sign_in_screen/sign_in_screen.dart';
+import '../../reviews/ui/screens/reviews_add_screen.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/increment_decrement_counter.dart';
 import '../widgets/product_image_carousel.dart';
@@ -95,7 +97,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             ],
                                           ),
                                           TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Get.toNamed(ReviewsAddScreen.name);
+                                            },
                                             child: const Text('Reviews'),
                                           ),
                                           Card(
