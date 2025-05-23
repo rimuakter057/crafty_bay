@@ -7,8 +7,12 @@ import 'package:get/get.dart';
 
 import '../core/network_caller/network_caller.dart';
 import '../features/ui/common/controllers/main_bottom_nav_controller.dart';
+import '../features/ui/common/controllers/new_product_list_controller.dart';
+import '../features/ui/common/controllers/popular_product_list_controller.dart';
+import '../features/ui/common/controllers/special_product_list_controller.dart';
 import '../features/ui/data/auth/controller/sign_in_controller.dart';
 import '../features/ui/data/auth/controller/veify_otp_controller.dart';
+import '../features/ui/screens/brand/data/controller/brand_list_controller.dart';
 import '../features/ui/screens/cart/ui/controller/cart_list_controller.dart';
 
 class ControllerBinder extends Bindings {
@@ -24,5 +28,9 @@ class ControllerBinder extends Bindings {
     Get.put(VerifyOtpController());
     Get.put(CartListController());
     Get.put(ReviewsListController());
+    Get.put(BrandsListController());
+    Get.put(PopularProductListController());
+    Get.put(SpecialProductListController());
+    Get.put(NewProductListController());
   }
 }

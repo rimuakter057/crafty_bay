@@ -7,8 +7,12 @@ import 'package:flutter/material.dart';
 import '../../../features/ui/common/screens/main_bottom_nav_screen.dart';
 import '../../../features/ui/screens/auth/sign_in_screen/sign_in_screen.dart';
 import '../../../features/ui/screens/auth/splash_screen/splash_screen.dart';
+import '../../../features/ui/screens/brand/ui/screens/brandListScreen.dart';
+import '../../../features/ui/screens/product/screens/new_product_list_screen.dart';
+import '../../../features/ui/screens/product/screens/popular_product_list_screen.dart';
 import '../../../features/ui/screens/product/screens/product_details_screen.dart';
 import '../../../features/ui/screens/product/screens/product_list_screen.dart';
+import '../../../features/ui/screens/product/screens/special_product_list_screen.dart';
 import '../../../features/ui/screens/reviews/ui/screens/reviews_add_screen.dart';
 import '../../../features/ui/screens/reviews/ui/screens/reviews_list_screen.dart';
 
@@ -17,7 +21,7 @@ import '../../../features/ui/screens/reviews/ui/screens/reviews_list_screen.dart
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    print("➡️ Route requested: ${settings.name}");
+    print("route requested: ${settings.name}");
     late Widget route;
     if (settings.name == SplashScreen.name) {
       route = const SplashScreen();
@@ -41,6 +45,14 @@ class AppRoutes {
     }else if (settings.name == ReviewsListScreen.name) {
       final productId = settings.arguments as String;
       route =  ReviewsListScreen(productId: productId,);
+    }else if (settings.name == BrandsListScreen.name) {
+      route = const BrandsListScreen();
+    } else if (settings.name == PopularProductListScreen.name) {
+      route = const PopularProductListScreen();
+    } else if (settings.name == SpecialProductListScreen.name) {
+      route = const SpecialProductListScreen();
+    }else if (settings.name == NewProductListScreen.name) {
+      route = const NewProductListScreen();
     }
 
     return MaterialPageRoute(builder: (context) {

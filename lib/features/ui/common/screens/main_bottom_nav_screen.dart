@@ -8,6 +8,9 @@ import '../../screens/auth/sign_in_screen/sign_in_screen.dart';
 import '../../screens/category/category_list_screen.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/wishlist/ui/screens/wish_list_screen.dart';
+import '../controllers/new_product_list_controller.dart';
+import '../controllers/popular_product_list_controller.dart';
+import '../controllers/special_product_list_controller.dart';
 
 
 class MainBottomNavBarScreen extends StatefulWidget {
@@ -35,6 +38,9 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<HomeSliderController>().getSlider();
       Get.find<CategoryController>().getCategoryList();
+      Get.find<PopularProductListController>().getProduct();
+      Get.find<NewProductListController>().getProduct();
+      Get.find<SpecialProductListController>().getProduct();
     });
   }
 

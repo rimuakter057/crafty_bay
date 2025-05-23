@@ -5,6 +5,8 @@ import 'package:crafty_bay/features/ui/common/model/category_model.dart';
 import 'package:crafty_bay/features/ui/screens/home/widget/appbar_action_button.dart';
 import 'package:crafty_bay/features/ui/screens/home/widget/home_carousel_slide.dart';
 import 'package:crafty_bay/features/ui/screens/home/widget/section_header.dart';
+import 'package:crafty_bay/features/ui/screens/product/screens/popular_product_list_screen.dart';
+import 'package:crafty_bay/features/ui/screens/product/screens/special_product_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ import '../../../../app/utils/asset_path.dart';
 import '../../common/controllers/main_bottom_nav_controller.dart';
 import '../../widget/category_item.dart';
 import '../../widget/product_card.dart';
+import '../product/screens/new_product_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,21 +52,27 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               SectionHeader(
                 title: "popular",
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.toNamed(PopularProductListScreen.name);
+                },
               ),
               const SizedBox(height: 16),
               _buildProductSection(),
               const SizedBox(height: 16),
               SectionHeader(
                 title:"special offer",
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.toNamed(SpecialProductListScreen.name);
+                },
               ),
               const SizedBox(height: 16),
               _buildProductSection(),
               const SizedBox(height: 16),
               SectionHeader(
                 title: "new",
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.toNamed(NewProductListScreen.name);
+                },
               ),
               const SizedBox(height: 16),
               _buildProductSection(),

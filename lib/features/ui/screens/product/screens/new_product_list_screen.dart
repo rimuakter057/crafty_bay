@@ -1,64 +1,56 @@
-import 'package:crafty_bay/features/ui/common/controllers/main_bottom_nav_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/wish_list_controller.dart';
-import '../widget/wish_list_widget.dart';
+import '../../../common/controllers/new_product_list_controller.dart';
+import '../../../widget/product_card.dart';
 
-class WishListScreen extends StatefulWidget {
-  const WishListScreen({super.key});
+class NewProductListScreen extends StatefulWidget {
+  const NewProductListScreen({super.key});
 
+  static String name = "/NewProductList";
 
   @override
-  State<WishListScreen> createState() =>
-      _WishListScreenState();
+  State<NewProductListScreen> createState() => _NewProductListScreenState();
 }
 
-class _WishListScreenState extends State<WishListScreen> {
-  final ScrollController _scrollController = ScrollController();
+class _NewProductListScreenState extends State<NewProductListScreen> {
 
-  final WishListController _wishListController = WishListController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _scrollController.addListener(pagination);
-    _wishListController.getProduct();
   }
-
-  void pagination() {
-    if (_scrollController.position.extentAfter < 300) {
-      _wishListController.getProduct();
+  void pagination(){
+    if(_scrollController.position.extentAfter < 300){
+      Get.find<NewProductListController>().getProduct();
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        Get.find<MainBottomNavBarController>().backToHome();
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Get.find<MainBottomNavBarController>().backToHome();
-            },
-            icon: Icon(Icons.arrow_back_ios_new_outlined),
-          ),
-          title: Text('Popular', style: TextStyle(fontSize: 24)),
-          forceMaterialTransparency: true,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new_outlined),
         ),
-        body: GetBuilder(
-          init: _wishListController,
+        title: Text('New', style: TextStyle(fontSize: 24)),
+        forceMaterialTransparency: true,
+      ),
+      body: GetBuilder<NewProductListController>(
           builder: (controller) {
             return controller.inProgress
                 ? Center(child: CircularProgressIndicator())
                 : RefreshIndicator(
               onRefresh: () async {
-                _wishListController.refrash();
+                Get.find<NewProductListController>().refrash();
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -72,11 +64,11 @@ class _WishListScreenState extends State<WishListScreen> {
                         mainAxisSpacing: 20,
                       ),
                       delegate: SliverChildBuilderDelegate(
-                          childCount: controller.productList.length,
+                          childCount: controller.producvtList.length,
                               (context, index) {
                             return FittedBox(
-                              child: WishListWidget(
-                                products: controller.productList[index].product,
+                              child: ProductCard(
+                                productModel: controller.producvtList[index],
                               ),
                             );
                           }),
@@ -91,8 +83,7 @@ class _WishListScreenState extends State<WishListScreen> {
                 ),
               ),
             );
-          },
-        ),
+          }
       ),
     );
   }

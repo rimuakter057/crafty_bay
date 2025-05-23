@@ -3,16 +3,16 @@ import 'package:crafty_bay/core/network_caller/network_caller.dart';
 
 import 'package:get/get.dart';
 
-import '../../model/wish_list_model.dart';
+import '../../screens/product/data/model/product_model.dart';
 
-class WishListController extends GetxController {
+class NewProductListController extends GetxController {
   final int _perPageDataCount = 30;
   bool _inProgress = false;
   bool _paginationInProgress = false;
   int _currentPage = 0;
   int? _totalPage;
   String? _errorMassage;
-  List<WishListItemModel> _productList = [];
+  List<ProductModel> _productList = [];
 
   bool get inProgress => _inProgress;
 
@@ -22,7 +22,7 @@ class WishListController extends GetxController {
 
   int get currentPage => _currentPage;
 
-  List<WishListItemModel> get productList => _productList;
+  List<ProductModel> get producvtList => _productList;
 
   Future<bool> getProduct() async {
     if (_paginationInProgress) {
@@ -44,16 +44,17 @@ class WishListController extends GetxController {
     update();
 
     NetworkResponse response = await Get.find<NetworkCaller>().getRequest(
-      url: AppUrls.wishlist,
+      url: AppUrls.productList,
       queryParams: {
         'count': _perPageDataCount,
         'page': _currentPage,
+        'tag': 'new',
       },
     );
     if (response.isSuccess) {
       _productList.addAll(
         (response.responseData!['data']['results'] as List)
-            .map((e) => WishListItemModel.fromJson(e))
+            .map((e) => ProductModel.fromJson(e))
             .toList(),
       );
       _totalPage = response.responseData!['data']['last_page'] ?? _totalPage;

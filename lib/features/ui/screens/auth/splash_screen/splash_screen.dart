@@ -1,5 +1,7 @@
 import 'package:crafty_bay/app/utils/sizes.dart';
+import 'package:crafty_bay/features/ui/data/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../app/utils/asset_path.dart';
 import '../../../common/screens/main_bottom_nav_screen.dart';
@@ -15,7 +17,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-/*
   @override
   void initState() {
     super.initState();
@@ -23,10 +24,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _moveToNextScreen() async {
+    Get.find<AuthController>().getUserData();
     await Future.delayed(const Duration(seconds: 2));
     Navigator.pushReplacementNamed(context, MainBottomNavBarScreen.name);
   }
-*/
 
 
 
