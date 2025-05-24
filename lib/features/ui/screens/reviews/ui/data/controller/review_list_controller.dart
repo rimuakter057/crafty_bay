@@ -4,17 +4,16 @@ import 'package:crafty_bay/app/app_urls.dart';
 import 'package:crafty_bay/core/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
-import '../../../../wishlist/model/wish_list_model.dart';
 import '../models/review_model.dart';
 
-class WishListController extends GetxController {
+class ReviewListController extends GetxController {
   final int _perPageDataCount = 30;
   bool _inProgress = false;
   bool _paginationInProgress = false;
   int _currentPage = 0;
   int? _totalPage;
   String? _errorMassage;
-  List<WishListItemModel> _productList = [];
+  List<ReviewModel> _productList = [];
 
   bool get inProgress => _inProgress;
 
@@ -24,9 +23,9 @@ class WishListController extends GetxController {
 
   int get currentPage => _currentPage;
 
-  List<WishListItemModel> get productList => _productList;
+  List<ReviewModel> get productList => _productList;
 
-  Future<bool> getProduct() async {
+  Future<bool> getReviewList(String productId) async {
     if (_paginationInProgress) {
       return false;
     }
@@ -46,7 +45,7 @@ class WishListController extends GetxController {
     update();
 
     NetworkResponse response = await Get.find<NetworkCaller>().getRequest(
-      url: AppUrls.wishlist,
+      url: AppUrls.reviewList(productId),
       queryParams: {
         'count': _perPageDataCount,
         'page': _currentPage,
@@ -55,7 +54,7 @@ class WishListController extends GetxController {
     if (response.isSuccess) {
       _productList.addAll(
         (response.responseData!['data']['results'] as List)
-            .map((e) => WishListItemModel.fromJson(e))
+            .map((e) => ReviewModel.fromJson(e))
             .toList(),
       );
       _totalPage = response.responseData!['data']['last_page'] ?? _totalPage;
@@ -73,45 +72,12 @@ class WishListController extends GetxController {
     return isSuccess;
   }
 
-  void refrash() {
-    _productList = [];
-    _currentPage = 0;
-    getProduct();
-  }
 }
 
 
 
 
-class ReviewsListController extends GetxController {
-  bool _getReviewsInProgress= false;
-  bool get inProgress =>_getReviewsInProgress;
-  String? _errorMessage;
-  String get errorMessage => _errorMessage!;
-  List<ReviewModel> _reviewItemList = [];
-  List<ReviewModel> get reviewItemList => _reviewItemList;
-  Future <bool> getReviewList(String productId)async{
-    bool isSuccess=false;
-    _getReviewsInProgress=true;
-    update();
-    final NetworkResponse response =await Get.find<NetworkCaller>().getRequest(
-        url:AppUrls.reviewList(productId) );
-    if (response.isSuccess) {
-      List<ReviewModel> list = [];
-      for (Map<String, dynamic> json in response.responseData!['data']
-      ['results']) {
-        list.add(ReviewModel.fromJson(json));
-      }
-      _reviewItemList = list;
-      isSuccess = true;
-    } else {
-      _errorMessage = response.errorMessage;
-    }
-    _getReviewsInProgress = false;
-    update();
-    return isSuccess;
-  }
-}
+
 
 
 

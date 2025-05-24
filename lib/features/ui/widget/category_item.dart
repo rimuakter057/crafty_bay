@@ -30,7 +30,9 @@ class CategoryItem extends StatelessWidget {
                 categoryModel.icon,
                 width: 48,
                 height: 48,
-                color: AppColors.themeColor,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.image_not_supported_outlined);
+                },
               ),
             ),
           ),

@@ -13,8 +13,12 @@ import 'package:get/get.dart';
 
 import '../../../../app/utils/asset_path.dart';
 import '../../common/controllers/main_bottom_nav_controller.dart';
+import '../../common/controllers/new_product_list_controller.dart';
+import '../../common/controllers/popular_product_list_controller.dart';
+import '../../common/controllers/special_product_list_controller.dart';
 import '../../widget/category_item.dart';
 import '../../widget/product_card.dart';
+import '../product/data/model/product_model.dart';
 import '../product/screens/new_product_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.toNamed(PopularProductListScreen.name);
                 },
               ),
+              _buildPopularProductView(),
               const SizedBox(height: 16),
               _buildProductSection(),
               const SizedBox(height: 16),
@@ -65,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.toNamed(SpecialProductListScreen.name);
                 },
               ),
+              _buildSpecialProductView(),
               const SizedBox(height: 16),
               _buildProductSection(),
               const SizedBox(height: 16),
@@ -74,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.toNamed(NewProductListScreen.name);
                 },
               ),
+              _buildNewProductView(),
               const SizedBox(height: 16),
               _buildProductSection(),
             ],
@@ -96,6 +103,110 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  SizedBox _buildNewProductView() {
+    return SizedBox(
+      height: 190,
+      child: GetBuilder<NewProductListController>(
+        builder: (controller) {
+          return controller.inProgress
+              ? Center(
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: CenterCircularIndicator(),
+            ),
+          )
+              : ListView.builder(
+            itemCount:
+            controller.producvtList.length > 10
+                ? 10
+                : controller.producvtList.length,
+            padding: EdgeInsets.symmetric(horizontal: 14),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              ProductModel productModel = controller.producvtList[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: FittedBox(
+                  child: ProductCard(productModel: productModel),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+  SizedBox _buildSpecialProductView() {
+    return SizedBox(
+      height: 190,
+      child: GetBuilder<SpecialProductListController>(
+        builder: (controller) {
+          return controller.inProgress
+              ? Center(
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: CenterCircularIndicator(),
+            ),
+          )
+              : ListView.builder(
+            itemCount:
+            controller.producvtList.length > 10
+                ? 10
+                : controller.producvtList.length,
+            padding: EdgeInsets.symmetric(horizontal: 14),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              ProductModel productModel = controller.producvtList[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: FittedBox(
+                  child: ProductCard(productModel: productModel),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+  SizedBox _buildPopularProductView() {
+    return SizedBox(
+      height: 190,
+      child: GetBuilder<PopularProductListController>(
+        builder: (controller) {
+          return controller.inProgress
+              ? Center(
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: CenterCircularIndicator(),
+            ),
+          )
+              : ListView.builder(
+            itemCount:
+            controller.producvtList.length > 10
+                ? 10
+                : controller.producvtList.length,
+            padding: EdgeInsets.symmetric(horizontal: 14),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              ProductModel productModel = controller.producvtList[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: FittedBox(
+                  child: ProductCard(productModel: productModel),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+
 
   Widget _buildCategoriesSection() {
     return  GetBuilder<CategoryController>(
@@ -144,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Image.asset(AssetPath.appLogoPng),
+      title: Image.asset(AssetPath.appLogoPng, height: 30, width: 30),
       actions: [
         AppBarActionButton(
           icon: Icons.person_outline,

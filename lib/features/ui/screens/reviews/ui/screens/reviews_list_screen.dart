@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../data/controller/add_review_controller.dart';
+import '../data/controller/review_list_controller.dart';
+
 
 
 class ReviewsListScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class ReviewsListScreen extends StatefulWidget {
 }
 
 class _ReviewsListScreenState extends State<ReviewsListScreen> {
-  final ReviewsListController _reviewsListController = Get.find<ReviewsListController>();
+  final ReviewListController _reviewsListController = Get.find<ReviewListController>();
   @override
   void initState() {
     super.initState();

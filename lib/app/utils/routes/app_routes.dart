@@ -4,6 +4,7 @@ import 'package:crafty_bay/features/ui/screens/auth/sign_up_screen/sign_up_scree
 import 'package:crafty_bay/features/ui/screens/auth/verifyOtpScreen/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../features/ui/cart/ui/screens/cart_screen.dart';
 import '../../../features/ui/common/screens/main_bottom_nav_screen.dart';
 import '../../../features/ui/screens/auth/sign_in_screen/sign_in_screen.dart';
 import '../../../features/ui/screens/auth/splash_screen/splash_screen.dart';
@@ -53,6 +54,8 @@ class AppRoutes {
       route = const SpecialProductListScreen();
     }else if (settings.name == NewProductListScreen.name) {
       route = const NewProductListScreen();
+    }else if (settings.name == CartListScreen.name) {
+      route = const CartListScreen();
     }
 
     return MaterialPageRoute(builder: (context) {

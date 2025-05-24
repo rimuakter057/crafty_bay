@@ -36,7 +36,7 @@ final ProductModel productModel;
                   ),
                   image:productModel.photos.isNotEmpty? DecorationImage(
                       image: NetworkImage(productModel.photos.first),
-                      fit: BoxFit.scaleDown):null,
+                      fit: BoxFit.cover):null,
                 ),
                 child: productModel.photos.isEmpty?Icon(Icons.error):null,
               ),

@@ -1,9 +1,9 @@
 import 'package:crafty_bay/features/ui/common/controllers/category_controller.dart';
 import 'package:crafty_bay/features/ui/common/controllers/home_slider_controller.dart';
 import 'package:crafty_bay/features/ui/common/controllers/main_bottom_nav_controller.dart';
-import 'package:crafty_bay/features/ui/screens/cart/ui/screens/cart_list_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../cart/ui/screens/cart_screen.dart';
 import '../../screens/auth/sign_in_screen/sign_in_screen.dart';
 import '../../screens/category/category_list_screen.dart';
 import '../../screens/home/home_screen.dart';
