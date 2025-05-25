@@ -100,7 +100,7 @@ class _CartListScreenState extends State<CartListScreen> {
               children: [
                 Text(
                   'Total Price',
-                  style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.white),
+                  style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.textPrimary),
                 ),
                 Text(
                   '$totalPrice',
@@ -134,7 +134,9 @@ class _CartListScreenState extends State<CartListScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: Text('Checkout'),
+            child: Text('Checkout',
+              style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.white),
+            ),
           ),
         ],
       ),
