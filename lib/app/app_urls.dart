@@ -12,8 +12,7 @@ class AppUrls{
  static const String brandListUrl = "$_baseUrl/brands";
   static  String brandsRead(String brandId) => "$_baseUrl/brands/$brandId";
   static const String wishlist = '$_baseUrl/wishlist';
-  static const String reviewAdd = '$_baseUrl/review';
+  static String reviewList = '$_baseUrl/reviews';
 static  String productDetails(String productId) => "$_baseUrl/products/id/$productId";
  static String deleteFromCartListUrl(String id) => '$_baseUrl/cart/$id';
-  static  String reviewList(String productId) => "$_baseUrl/review?product=$productId";
 }

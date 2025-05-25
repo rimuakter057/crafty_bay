@@ -27,7 +27,6 @@ class ControllerBinder extends Bindings {
     Get.put(SignInController());
     Get.put(VerifyOtpController());
     Get.put(CartListController());
-    Get.put(ReviewListController());
     Get.put(BrandsListController());
     Get.put(PopularProductListController());
     Get.put(SpecialProductListController());

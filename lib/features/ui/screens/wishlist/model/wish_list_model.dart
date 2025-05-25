@@ -1,12 +1,12 @@
-class ReviewModel {
+class WishModel {
   String? id;
   String? userId;
   String? createdAt;
   WishListProductModel? product;
 
-  ReviewModel({this.id, this.userId, this.createdAt, this.product});
+  WishModel({this.id, this.userId, this.createdAt, this.product});
 
-  ReviewModel.fromJson(Map<String, dynamic> json) {
+  WishModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     userId = json['user'];
     createdAt = json['createdAt'];

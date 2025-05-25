@@ -12,7 +12,7 @@ class WishListController extends GetxController {
   int _currentPage = 0;
   int? _totalPage;
   String? _errorMassage;
-  List<ReviewModel> _productList = [];
+  List<WishModel> _productList = [];
 
   bool get inProgress => _inProgress;
 
@@ -22,7 +22,7 @@ class WishListController extends GetxController {
 
   int get currentPage => _currentPage;
 
-  List<ReviewModel> get productList => _productList;
+  List<WishModel> get productList => _productList;
 
   Future<bool> getProduct() async {
     if (_paginationInProgress) {
@@ -53,7 +53,7 @@ class WishListController extends GetxController {
     if (response.isSuccess) {
       _productList.addAll(
         (response.responseData!['data']['results'] as List)
-            .map((e) => ReviewModel.fromJson(e))
+            .map((e) => WishModel.fromJson(e))
             .toList(),
       );
       _totalPage = response.responseData!['data']['last_page'] ?? _totalPage;

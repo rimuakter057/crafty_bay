@@ -1,54 +1,62 @@
-import 'package:crafty_bay/features/ui/screens/reviews/ui/screens/reviews_list_screen.dart';
+
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ReviewsAddScreen extends StatefulWidget {
-  const ReviewsAddScreen({super.key, });
+  const ReviewsAddScreen({super.key});
 
-  static const String name = '/reviews';
+  static String name = '/ProductAddReview';
 
   @override
   State<ReviewsAddScreen> createState() => _ReviewsAddScreenState();
 }
 
 class _ReviewsAddScreenState extends State<ReviewsAddScreen> {
-  final TextEditingController _nameController= TextEditingController();
-  final TextEditingController _detailsController= TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        title: Text("Reviews Add"),
+      appBar:  AppBar(
+        forceMaterialTransparency: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
+        title: Text('Add Reviews', style: TextStyle(fontSize: 20)),
       ),
-      body:SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          padding: const EdgeInsets.symmetric(horizontal: 28),
           child: Column(
-            children:[
-              SizedBox(height: 100,),
+            children: [
+              SizedBox(height: 52),
               TextField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name',
+                    hintText: 'First name'
                 ),
-                controller: _nameController,
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 16),
               TextField(
-                maxLines: 8,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'details',
+                    hintText: 'Last name'
                 ),
-          controller: _detailsController,
               ),
-              SizedBox(height: 10,),
-              ElevatedButton(onPressed: (){
-                Get.toNamed(ReviewsListScreen.name);
-              }, child: Text("button"))
-            ]
+              SizedBox(height: 16),
+              TextField(
+                maxLines: 7,
+                decoration: InputDecoration(
+                  hintText: 'Write Review',
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+
+                ),
               ),
+              SizedBox(height: 16),
+              ElevatedButton(onPressed: () {
+
+              }, child: Text('Submit'))
+            ],
+          ),
         ),
       ),
     );
