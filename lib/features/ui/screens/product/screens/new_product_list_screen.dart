@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,6 @@ class NewProductListScreen extends StatefulWidget {
 }
 
 class _NewProductListScreenState extends State<NewProductListScreen> {
-
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -24,12 +22,12 @@ class _NewProductListScreenState extends State<NewProductListScreen> {
     super.initState();
     _scrollController.addListener(pagination);
   }
-  void pagination(){
-    if(_scrollController.position.extentAfter < 300){
+
+  void pagination() {
+    if (_scrollController.position.extentAfter < 300) {
       Get.find<NewProductListController>().getProduct();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,45 +43,44 @@ class _NewProductListScreenState extends State<NewProductListScreen> {
         forceMaterialTransparency: true,
       ),
       body: GetBuilder<NewProductListController>(
-          builder: (controller) {
-            return controller.inProgress
-                ? Center(child: CircularProgressIndicator())
-                : RefreshIndicator(
-              onRefresh: () async {
-                Get.find<NewProductListController>().refrash();
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisExtent: 200,
-                        mainAxisSpacing: 20,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
+        builder: (controller) {
+          return controller.inProgress
+              ? Center(child: CircularProgressIndicator())
+              : RefreshIndicator(
+                onRefresh: () async {
+                  Get.find<NewProductListController>().refrash();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: CustomScrollView(
+                    controller: _scrollController,
+                    slivers: [
+                      SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisExtent: 200,
+                          mainAxisSpacing: 20,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
                           childCount: controller.producvtList.length,
-                              (context, index) {
+                          (context, index) {
                             return FittedBox(
                               child: ProductCard(
                                 productModel: controller.producvtList[index],
                               ),
                             );
-                          }),
-                    ),
-                    if(controller.paginationInProgress)
-                      SliverToBoxAdapter(
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                          },
                         ),
-                      )
-                  ],
+                      ),
+                      if (controller.paginationInProgress)
+                        SliverToBoxAdapter(
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }
+              );
+        },
       ),
     );
   }

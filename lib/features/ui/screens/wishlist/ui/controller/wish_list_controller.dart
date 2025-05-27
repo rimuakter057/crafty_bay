@@ -45,10 +45,7 @@ class WishListController extends GetxController {
 
     NetworkResponse response = await Get.find<NetworkCaller>().getRequest(
       url: AppUrls.wishlist,
-      queryParams: {
-        'count': _perPageDataCount,
-        'page': _currentPage,
-      },
+      queryParams: {'count': _perPageDataCount, 'page': _currentPage},
     );
     if (response.isSuccess) {
       _productList.addAll(

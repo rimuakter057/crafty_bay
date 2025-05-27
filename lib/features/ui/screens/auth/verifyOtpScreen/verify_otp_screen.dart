@@ -10,7 +10,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../../app/utils/sizes.dart';
 import '../../../widget/app_logo.dart';
-import '../sign_up_screen/sign_up_screen.dart';
+
 
 class VerifyOtpScreen extends StatefulWidget {
   const VerifyOtpScreen({super.key, required this.email});
@@ -29,18 +29,18 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   RxInt _currentTime = 30.obs;
 
-void _startTimer() {
-  _currentTime.value=30;
-  Timer.periodic(Duration(seconds: 30), (timer){
-    if(_currentTime.value==0){
-      timer.cancel();
-    }else{
-      _currentTime.value=_currentTime.value-1;
-    }
-  });
-}
+  void _startTimer() {
+    _currentTime.value = 30;
+    Timer.periodic(Duration(seconds: 30), (timer) {
+      if (_currentTime.value == 0) {
+        timer.cancel();
+      } else {
+        _currentTime.value = _currentTime.value - 1;
+      }
+    });
+  }
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -96,39 +96,38 @@ void _startTimer() {
                   },
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    _onTapVerifyButton();
-                  },
-                  child: Text("verify"),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _onTapVerifyButton();
+                    },
+                    child: Text("verify"),
+                  ),
                 ),
-                Obx(
-                  () {
-                    return Column(
-                      children: [
-                        Visibility(
-                          visible: _currentTime.value==0,
-                          child: TextButton(
-                            onPressed: () {
-                              /// controller
-                              _startTimer();
-                            },
-                            child: Text("Resend Otp"),
-                          ),
+                Obx(() {
+                  return Column(
+                    children: [
+                      Visibility(
+                        visible: _currentTime.value == 0,
+                        child: TextButton(
+                          onPressed: () {
+                            /// controller
+                            _startTimer();
+                          },
+                          child: Text("Resend Otp"),
                         ),
-                        Visibility(
-                          visible: _currentTime.value!=0,
-                          child: TextButton(
-                            onPressed: () {
-
-                            },
-                            child: Text("Resend in ${_currentTime.value}s"),
-                          ),
+                      ),
+                      Visibility(
+                        visible: _currentTime.value != 0,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text("Resend in ${_currentTime.value}s"),
                         ),
-                      ],
-                    );
-                  }
-                ),
+                      ),
+                    ],
+                  );
+                }),
                 const SizedBox(height: 24),
               ],
             ),

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../../../../../app/utils/constants/color.dart';
 import '../../../data/auth/controller/auth_controller.dart';
 import '../../auth/sign_in_screen/sign_in_screen.dart';
-import '../../reviews/ui/screens/reviews_add_screen.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/increment_decrement_counter.dart';
 import '../widgets/product_image_carousel.dart';
@@ -98,7 +97,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.pushNamed(context, ReviewsListScreen.name, arguments: widget.productId);    },
+                                              Navigator.pushNamed(
+                                                context,
+                                                ReviewsListScreen.name,
+                                                arguments: widget.productId,
+                                              );
+                                            },
                                             child: const Text('Reviews'),
                                           ),
                                           Card(
@@ -129,6 +133,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ],
                             ),
                             const SizedBox(height: 16),
+
                             // if (controller.productModel.colors.isNotEmpty)
                             //   Column(
                             //     crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,8 +147,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             //       ),
                             //     ],
                             //   ),
-
-
                             ColorPicker(
                               colors: controller.productModel.colors,
                               // colors: const ['Red', 'White', 'Black', 'Pink'],

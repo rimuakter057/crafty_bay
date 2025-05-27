@@ -13,19 +13,19 @@ class ProductModel {
   final int availableQuantity;
   final String description;
 
-  ProductModel(
-      {required this.id,
-        required this.title,
-        required this.brand,
-        required this.regularPrice,
-        required this.currentPrice,
-        required this.rating,
-        required this.photos,
-        required this.sizes,
-        required this.colors,
-        required this.availableQuantity,
-        required this.description,
-      });
+  ProductModel({
+    required this.id,
+    required this.title,
+    required this.brand,
+    required this.regularPrice,
+    required this.currentPrice,
+    required this.rating,
+    required this.photos,
+    required this.sizes,
+    required this.colors,
+    required this.availableQuantity,
+    required this.description,
+  });
 
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {
     List<dynamic> photoList = jsonData['photos'] ?? [];

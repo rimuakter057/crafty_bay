@@ -48,6 +48,7 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_sslcommerz: ^2.4.4
   qr_flutter: ^4.1.0
+  flutter_rating_bar: ^4.0.1
   
 
 dev_dependencies:

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../app/utils/constants/color.dart';
@@ -21,10 +20,10 @@ class _ColorPickerState extends State<ColorPicker> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Color', style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600
-        ),),
+        const Text(
+          'Color',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
         const SizedBox(height: 8),
         SizedBox(
           height: 40,
@@ -48,14 +47,17 @@ class _ColorPickerState extends State<ColorPicker> {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   margin: const EdgeInsets.only(right: 8),
                   alignment: Alignment.center,
-                  child: Text(color, style: TextStyle(
-                    color: selectedColor == color ? Colors.white : null,
-                  ),),
+                  child: Text(
+                    color,
+                    style: TextStyle(
+                      color: selectedColor == color ? Colors.white : null,
+                    ),
+                  ),
                 ),
               );
             },
           ),
-        )
+        ),
       ],
     );
   }

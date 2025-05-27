@@ -36,7 +36,7 @@ class NetworkCaller {
 
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
-        'token':getx.Get.find<AuthController>().token??'',
+        'token': getx.Get.find<AuthController>().token ?? '',
       };
 
       ///log request
@@ -76,7 +76,6 @@ class NetworkCaller {
     }
   }
 
-
   Future<NetworkResponse> postRequest({
     required String url,
     Map<String, dynamic>? body,
@@ -85,7 +84,7 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'content-type': 'application/json',
-        'token':getx.Get.find<AuthController>().token??'',
+        'token': getx.Get.find<AuthController>().token ?? '',
       };
       _logRequest(url, headers);
       Response response = await post(
@@ -131,9 +130,9 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'content-type': 'application/json',
-        'token':getx.Get.find<AuthController>().token??'',
+        'token': getx.Get.find<AuthController>().token ?? '',
       };
-      _logRequest(url, body, );
+      _logRequest(url, body);
 
       Response response = await patch(uri, headers: headers, body: body);
       _logResponse(url, response);
@@ -159,8 +158,6 @@ class NetworkCaller {
     }
   }
 
-
-
   Future<NetworkResponse> deleteRequest({
     required String url,
     Map<String, dynamic>? body,
@@ -169,21 +166,14 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'Content-Type': 'application/json',
-        'token':getx.Get.find<AuthController>().token??'',
+        'token': getx.Get.find<AuthController>().token ?? '',
       };
       _logRequest(url, headers);
       Response response;
       if (body != null && body.isNotEmpty) {
-        response = await delete(
-          uri,
-          headers: headers,
-          body: jsonEncode(body),
-        );
+        response = await delete(uri, headers: headers, body: jsonEncode(body));
       } else {
-        response = await delete(
-          uri,
-          headers: headers,
-        );
+        response = await delete(uri, headers: headers);
       }
       _logResponse(url, response);
 
@@ -203,30 +193,21 @@ class NetworkCaller {
     }
   }
 
-
-
-
   void _logResponse(String url, Response response) {
     _logger.i(
-        "URL => $url\nStatus Code: ${response.statusCode}\nHeaders: ${response.headers}\nBody: ${response.body}");
+      "URL => $url\nStatus Code: ${response.statusCode}\nHeaders: ${response.headers}\nBody: ${response.body}",
+    );
   }
 
   Future<void> _clearUserData() async {
     await getx.Get.find<AuthController>().clearUserData();
   }
 
-  void _logRequest(String url, Map<String, dynamic> headers,
-      {Map<String, dynamic>? requestBody}) {
+  void _logRequest(
+    String url,
+    Map<String, dynamic> headers, {
+    Map<String, dynamic>? requestBody,
+  }) {
     _logger.i("URL => $url\nHeaders: $headers\nBody: $requestBody");
   }
-
-  // void _logRequest(
-  //     String url,
-  //     Map<String, dynamic>? requestBody,
-  //     Map<String, String> headers,
-  //     ) {
-  //   _logger.i("Request: URL: $url,\nBody: $requestBody,\nHeaders: $headers");
-  // }
-
-
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,21 +63,20 @@ class _PopularProductListScreenState extends State<PopularProductListScreen> {
                           mainAxisSpacing: 20,
                         ),
                         delegate: SliverChildBuilderDelegate(
-                                childCount: controller.producvtList.length,
-                                (context, index) {
-                          return FittedBox(
-                            child: ProductCard(
-                              productModel: controller.producvtList[index],
-                            ),
-                          );
-                        }),
-                      ),
-                      if(controller.paginationInProgress)
-                      SliverToBoxAdapter(
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                          childCount: controller.producvtList.length,
+                          (context, index) {
+                            return FittedBox(
+                              child: ProductCard(
+                                productModel: controller.producvtList[index],
+                              ),
+                            );
+                          },
                         ),
-                      )
+                      ),
+                      if (controller.paginationInProgress)
+                        SliverToBoxAdapter(
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
                     ],
                   ),
                 ),

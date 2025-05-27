@@ -70,7 +70,7 @@ class _CartListScreenState extends State<CartListScreen> {
                         },
                       ),
                     ),
-                    _buildPriceAndChackOut(controller.totalPrice),
+                    _buildPriceAndCheckOut(controller.totalPrice),
                   ],
                 );
           },
@@ -79,7 +79,7 @@ class _CartListScreenState extends State<CartListScreen> {
     );
   }
 
-  Widget _buildPriceAndChackOut(double totalPrice) {
+  Widget _buildPriceAndCheckOut(double totalPrice) {
     return Container(
       height: 70,
       width: double.maxFinite,
@@ -129,13 +129,15 @@ class _CartListScreenState extends State<CartListScreen> {
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: AppColors.themeColor,
-              fixedSize: Size(120, 40),
+              fixedSize: Size(120, 50),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: Text('Checkout',
-              style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.white),
+            child: Center(
+              child: Text('Checkout',
+                style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.white,fontSize: 10),
+              ),
             ),
           ),
         ],

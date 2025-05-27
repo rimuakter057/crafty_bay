@@ -13,6 +13,7 @@ class AppUrls{
   static  String brandsRead(String brandId) => "$_baseUrl/brands/$brandId";
   static const String wishlist = '$_baseUrl/wishlist';
   static String reviewList = '$_baseUrl/reviews';
+  static String review = '$_baseUrl/review';
 static  String productDetails(String productId) => "$_baseUrl/products/id/$productId";
  static String deleteFromCartListUrl(String id) => '$_baseUrl/cart/$id';
 }

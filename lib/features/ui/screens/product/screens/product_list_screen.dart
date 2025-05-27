@@ -2,14 +2,13 @@ import 'package:crafty_bay/core/widgets/center_circular_indicator.dart';
 import 'package:crafty_bay/features/ui/common/model/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-
 import '../../../widget/product_card.dart';
 import '../data/controller/product_controller.dart';
 
 class ProductListScreen extends StatefulWidget {
-  const ProductListScreen({super.key,required this.category });
+  const ProductListScreen({super.key, required this.category});
 
- final CategoryModel category;
+  final CategoryModel category;
 
   static const String name = '/products';
 
@@ -27,8 +26,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
     _productListController.getProductByList(widget.category.id);
     _scrollController.addListener(_loadData);
   }
-  void _loadData(){
-    if(_scrollController.position.extentAfter<300){
+
+  void _loadData() {
+    if (_scrollController.position.extentAfter < 300) {
       _productListController.getProductByList(widget.category.id);
     }
   }
@@ -36,41 +36,40 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.category.title),
-      ),
+      appBar: AppBar(title: Text(widget.category.title)),
       body: GetBuilder(
         init: _productListController,
         builder: (controller) {
-          if(controller.isInitialLoading){
+          if (controller.isInitialLoading) {
             return CenterCircularIndicator();
           }
           return Column(
             children: [
               Expanded(
                 child: GridView.builder(
-                 controller: _scrollController,
+                  controller: _scrollController,
                   itemCount: controller.productList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 0
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 0,
                   ),
                   itemBuilder: (context, index) {
-
-                    return  FittedBox(child: ProductCard(
-                      productModel: controller.productList[index],
-
-                    ));
+                    return FittedBox(
+                      child: ProductCard(
+                        productModel: controller.productList[index],
+                      ),
+                    );
                   },
                 ),
               ),
               Visibility(
-                  visible: controller.isMoreLoading,
-                  child: LinearProgressIndicator())
+                visible: controller.isMoreLoading,
+                child: LinearProgressIndicator(),
+              ),
             ],
           );
-        }
+        },
       ),
     );
   }

@@ -13,7 +13,6 @@ import '../features/ui/common/controllers/special_product_list_controller.dart';
 import '../features/ui/data/auth/controller/sign_in_controller.dart';
 import '../features/ui/data/auth/controller/veify_otp_controller.dart';
 import '../features/ui/screens/brand/data/controller/brand_list_controller.dart';
-import '../features/ui/screens/reviews/ui/data/controller/review_list_controller.dart';
 
 class ControllerBinder extends Bindings {
   @override

@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../../../app/utils/constants/color.dart';
 
 class IncrementDecrementCountWidget extends StatefulWidget {
-  IncrementDecrementCountWidget({super.key, required this.quantity, required this.count});
+  IncrementDecrementCountWidget({
+    super.key,
+    required this.quantity,
+    required this.count,
+  });
   final Function(int) quantity;
   int count;
-
 
   @override
   State<IncrementDecrementCountWidget> createState() =>
@@ -15,8 +18,6 @@ class IncrementDecrementCountWidget extends StatefulWidget {
 
 class _IncrementDecrementCountWidgetState
     extends State<IncrementDecrementCountWidget> {
-
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +25,7 @@ class _IncrementDecrementCountWidgetState
         GestureDetector(
           onTap: () {
             widget.count++;
-            widget.quantity( widget.count);
+            widget.quantity(widget.count);
             setState(() {});
           },
           child: Container(
@@ -58,9 +59,9 @@ class _IncrementDecrementCountWidgetState
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               color:
-              widget.count < 2
-                  ? AppColors.themeColor.withOpacity(0.6)
-                  : AppColors.themeColor,
+                  widget.count < 2
+                      ? AppColors.themeColor.withOpacity(0.6)
+                      : AppColors.themeColor,
             ),
             child: Icon(Icons.remove, color: Colors.white),
           ),

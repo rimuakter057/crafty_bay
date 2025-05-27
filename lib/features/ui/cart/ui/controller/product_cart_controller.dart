@@ -1,14 +1,7 @@
 import 'package:crafty_bay/app/app_urls.dart';
-
 import 'package:crafty_bay/core/network_caller/network_caller.dart';
 import 'package:crafty_bay/features/ui/cart/model/cart_model.dart';
 import 'package:get/get.dart';
-
-
-
-
-
-
 
 class CartListController extends GetxController {
   bool _inProgress = false;
@@ -61,7 +54,7 @@ class CartListController extends GetxController {
   double get totalPrice {
     double total = 0;
     for (CartModel cartItem in _cardList) {
-      total += (cartItem.currentPrice! * cartItem.quantity!) as double;
+      total += (cartItem.currentPrice! * cartItem.quantity!);
     }
     return total;
   }

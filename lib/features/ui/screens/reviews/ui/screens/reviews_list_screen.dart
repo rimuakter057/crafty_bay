@@ -5,12 +5,6 @@ import 'package:get/get.dart';
 import '../../../../../../app/utils/constants/color.dart';
 import '../data/controller/review_list_controller.dart';
 
-
-
-
-
-
-
 class ReviewsListScreen extends StatefulWidget {
   const ReviewsListScreen({super.key, required this.productId});
   final String productId;
@@ -23,7 +17,6 @@ class ReviewsListScreen extends StatefulWidget {
 class _ReviewsListScreenState extends State<ReviewsListScreen> {
   final ReviewListController _reviewListController = ReviewListController();
   final ScrollController _scrollController = ScrollController();
-
 
   @override
   void initState() {
@@ -38,7 +31,6 @@ class _ReviewsListScreenState extends State<ReviewsListScreen> {
       _reviewListController.getProductReview(widget.productId);
     }
   }
-
 
   @override
   void dispose() {
@@ -59,7 +51,10 @@ class _ReviewsListScreenState extends State<ReviewsListScreen> {
           onPressed: () => Navigator.pop(context),
           icon: Icon(Icons.arrow_back_ios_new),
         ),
-        title: Text('Reviews', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        title: Text(
+          'Reviews',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
       ),
       body: GetBuilder(
         init: _reviewListController,
@@ -77,15 +72,21 @@ class _ReviewsListScreenState extends State<ReviewsListScreen> {
                         controller: _scrollController,
                         slivers: [
                           SliverPadding(
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 10,
+                            ),
                             sliver: SliverList(
                               delegate: SliverChildBuilderDelegate(
-                                    (context, index) {
+                                (context, index) {
                                   if (index < controller.reviewList.length) {
                                     return Column(
                                       children: [
-                                        ReviewItem(review: controller.reviewList[index]),
-                                        if (index != controller.reviewList.length - 1)
+                                        ReviewItem(
+                                          review: controller.reviewList[index],
+                                        ),
+                                        if (index !=
+                                            controller.reviewList.length - 1)
                                           Divider(
                                             color: Colors.grey.shade200,
                                             thickness: 1.0,
@@ -96,12 +97,15 @@ class _ReviewsListScreenState extends State<ReviewsListScreen> {
                                   } else if (controller.paginationInProgress) {
                                     return Padding(
                                       padding: const EdgeInsets.all(16.0),
-                                      child: Center(child: CircularProgressIndicator()),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
                                     );
                                   }
                                   return null;
                                 },
-                                childCount: controller.reviewList.length +
+                                childCount:
+                                    controller.reviewList.length +
                                     (controller.paginationInProgress ? 1 : 0),
                               ),
                             ),
@@ -109,7 +113,9 @@ class _ReviewsListScreenState extends State<ReviewsListScreen> {
                         ],
                       ),
                     ),
-                    _buildReviewCountAndAddButton(controller.totalReviewCount ?? 0),
+                    _buildReviewCountAndAddButton(
+                      controller.totalReviewCount ?? 0,
+                    ),
                   ],
                 ),
               ),
@@ -148,17 +154,23 @@ class _ReviewsListScreenState extends State<ReviewsListScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, ReviewsAddScreen.name);
+              Navigator.pushNamed(
+                context,
+                ReviewsAddScreen.name,
+                arguments: widget.productId,
+              );
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: AppColors.themeColor,
-              fixedSize: Size(80, 40),
+              fixedSize: Size(40, 40),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(100),
               ),
             ),
-            child: Icon(Icons.add, color: Colors.white, size: 26),
+            child: Center(
+              child: Icon(Icons.add, color: Colors.white, size: 10),
+            ),
           ),
         ],
       ),

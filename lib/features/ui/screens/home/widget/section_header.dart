@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -17,14 +16,8 @@ class SectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: textTheme.titleMedium?.copyWith(fontSize: 24),
-        ),
-        TextButton(
-          onPressed: onTapSeeAll,
-          child: Text("see all"),
-        )
+        Text(title, style: textTheme.titleMedium?.copyWith(fontSize: 24)),
+        TextButton(onPressed: onTapSeeAll, child: Text("see all")),
       ],
     );
   }

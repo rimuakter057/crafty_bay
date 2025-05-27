@@ -8,10 +8,8 @@ import '../widget/wish_list_widget.dart';
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
 
-
   @override
-  State<WishListScreen> createState() =>
-      _WishListScreenState();
+  State<WishListScreen> createState() => _WishListScreenState();
 }
 
 class _WishListScreenState extends State<WishListScreen> {
@@ -48,7 +46,7 @@ class _WishListScreenState extends State<WishListScreen> {
             },
             icon: Icon(Icons.arrow_back_ios_new_outlined),
           ),
-          title: Text('Popular', style: TextStyle(fontSize: 24)),
+          title: Text('Wishlist', style: TextStyle(fontSize: 24)),
           forceMaterialTransparency: true,
         ),
         body: GetBuilder(
@@ -57,40 +55,41 @@ class _WishListScreenState extends State<WishListScreen> {
             return controller.inProgress
                 ? Center(child: CircularProgressIndicator())
                 : RefreshIndicator(
-              onRefresh: () async {
-                _wishListController.refrash();
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisExtent: 200,
-                        mainAxisSpacing: 20,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                          childCount: controller.productList.length,
-                              (context, index) {
-                            return FittedBox(
-                              child: WishListWidget(
-                                products: controller.productList[index].product,
+                  onRefresh: () async {
+                    _wishListController.refrash();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: CustomScrollView(
+                      controller: _scrollController,
+                      slivers: [
+                        SliverGrid(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisExtent: 200,
+                                mainAxisSpacing: 20,
                               ),
-                            );
-                          }),
-                    ),
-                    if(controller.paginationInProgress)
-                      SliverToBoxAdapter(
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: controller.productList.length,
+                            (context, index) {
+                              return FittedBox(
+                                child: WishListWidget(
+                                  products:
+                                      controller.productList[index].product,
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      )
-                  ],
-                ),
-              ),
-            );
+                        if (controller.paginationInProgress)
+                          SliverToBoxAdapter(
+                            child: Center(child: CircularProgressIndicator()),
+                          ),
+                      ],
+                    ),
+                  ),
+                );
           },
         ),
       ),

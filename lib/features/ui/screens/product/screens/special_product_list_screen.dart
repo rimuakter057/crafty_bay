@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../common/controllers/special_product_list_controller.dart';
 import '../../../widget/product_card.dart';
 
@@ -11,11 +9,11 @@ class SpecialProductListScreen extends StatefulWidget {
   static String name = "/SpecialProductList";
 
   @override
-  State<SpecialProductListScreen> createState() => _SpecialProductListScreenState();
+  State<SpecialProductListScreen> createState() =>
+      _SpecialProductListScreenState();
 }
 
 class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
-
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -24,12 +22,12 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
     super.initState();
     _scrollController.addListener(pagination);
   }
-  void pagination(){
-    if(_scrollController.position.extentAfter < 300){
+
+  void pagination() {
+    if (_scrollController.position.extentAfter < 300) {
       Get.find<SpecialProductListController>().getProduct();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,45 +43,44 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
         forceMaterialTransparency: true,
       ),
       body: GetBuilder<SpecialProductListController>(
-          builder: (controller) {
-            return controller.inProgress
-                ? Center(child: CircularProgressIndicator())
-                : RefreshIndicator(
-              onRefresh: () async {
-                Get.find<SpecialProductListController>().refrash();
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisExtent: 200,
-                        mainAxisSpacing: 20,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
+        builder: (controller) {
+          return controller.inProgress
+              ? Center(child: CircularProgressIndicator())
+              : RefreshIndicator(
+                onRefresh: () async {
+                  Get.find<SpecialProductListController>().refrash();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: CustomScrollView(
+                    controller: _scrollController,
+                    slivers: [
+                      SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisExtent: 200,
+                          mainAxisSpacing: 20,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
                           childCount: controller.producvtList.length,
-                              (context, index) {
+                          (context, index) {
                             return FittedBox(
                               child: ProductCard(
                                 productModel: controller.producvtList[index],
                               ),
                             );
-                          }),
-                    ),
-                    if(controller.paginationInProgress)
-                      SliverToBoxAdapter(
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                          },
                         ),
-                      )
-                  ],
+                      ),
+                      if (controller.paginationInProgress)
+                        SliverToBoxAdapter(
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }
+              );
+        },
       ),
     );
   }

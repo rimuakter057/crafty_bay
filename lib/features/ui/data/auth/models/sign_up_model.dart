@@ -1,9 +1,3 @@
-
-
-
-
-
-
 class SignUpModel {
   final String email;
   final String firstName;
@@ -12,13 +6,14 @@ class SignUpModel {
   final String password;
   final String deliveryAddress;
 
-  SignUpModel(
-      {required this.email,
-        required this.firstName,
-        required this.lastName,
-        required this.phone,
-        required this.password,
-        required this.deliveryAddress});
+  SignUpModel({
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.phone,
+    required this.password,
+    required this.deliveryAddress,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -31,5 +26,3 @@ class SignUpModel {
     };
   }
 }
-
-

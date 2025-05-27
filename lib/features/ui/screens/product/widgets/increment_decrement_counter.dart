@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../app/utils/constants/color.dart';
@@ -9,10 +8,12 @@ class IncrementDecrementCounterWidget extends StatefulWidget {
   final Function(int) onChange;
 
   @override
-  State<IncrementDecrementCounterWidget> createState() => _IncrementDecrementCounterWidgetState();
+  State<IncrementDecrementCounterWidget> createState() =>
+      _IncrementDecrementCounterWidgetState();
 }
 
-class _IncrementDecrementCounterWidgetState extends State<IncrementDecrementCounterWidget> {
+class _IncrementDecrementCounterWidgetState
+    extends State<IncrementDecrementCounterWidget> {
   int count = 1;
 
   @override
@@ -32,16 +33,16 @@ class _IncrementDecrementCounterWidgetState extends State<IncrementDecrementCoun
           child: Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-                color: AppColors.themeColor,
-                borderRadius: BorderRadius.circular(4)
+              color: AppColors.themeColor,
+              borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(Icons.remove, color: Colors.white,),
+            child: const Icon(Icons.remove, color: Colors.white),
           ),
         ),
-        Text('$count', style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold
-        ),),
+        Text(
+          '$count',
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         GestureDetector(
           onTap: () {
             if (count >= 20) return;
@@ -52,16 +53,13 @@ class _IncrementDecrementCounterWidgetState extends State<IncrementDecrementCoun
           child: Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-                color: AppColors.themeColor,
-                borderRadius: BorderRadius.circular(4)
+              color: AppColors.themeColor,
+              borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(Icons.add, color: Colors.white,),
+            child: const Icon(Icons.add, color: Colors.white),
           ),
         ),
       ],
     );
   }
 }
-
-
-

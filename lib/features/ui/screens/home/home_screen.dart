@@ -1,4 +1,3 @@
-
 import 'package:crafty_bay/core/widgets/center_circular_indicator.dart';
 import 'package:crafty_bay/features/ui/common/controllers/category_controller.dart';
 import 'package:crafty_bay/features/ui/common/model/category_model.dart';
@@ -43,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const HomeCarouselSlider(),
 
-
               const SizedBox(height: 16),
               SectionHeader(
                 title: "Categories",
@@ -65,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildProductSection(),
               const SizedBox(height: 16),
               SectionHeader(
-                title:"special offer",
+                title: "special offer",
                 onTapSeeAll: () {
                   Get.toNamed(SpecialProductListScreen.name);
                 },
@@ -111,33 +109,34 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (controller) {
           return controller.inProgress
               ? Center(
-            child: SizedBox(
-              height: 40,
-              width: 40,
-              child: CenterCircularIndicator(),
-            ),
-          )
-              : ListView.builder(
-            itemCount:
-            controller.producvtList.length > 10
-                ? 10
-                : controller.producvtList.length,
-            padding: EdgeInsets.symmetric(horizontal: 14),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              ProductModel productModel = controller.producvtList[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: FittedBox(
-                  child: ProductCard(productModel: productModel),
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CenterCircularIndicator(),
                 ),
+              )
+              : ListView.builder(
+                itemCount:
+                    controller.producvtList.length > 10
+                        ? 10
+                        : controller.producvtList.length,
+                padding: EdgeInsets.symmetric(horizontal: 14),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  ProductModel productModel = controller.producvtList[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: FittedBox(
+                      child: ProductCard(productModel: productModel),
+                    ),
+                  );
+                },
               );
-            },
-          );
         },
       ),
     );
   }
+
   SizedBox _buildSpecialProductView() {
     return SizedBox(
       height: 190,
@@ -145,33 +144,34 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (controller) {
           return controller.inProgress
               ? Center(
-            child: SizedBox(
-              height: 40,
-              width: 40,
-              child: CenterCircularIndicator(),
-            ),
-          )
-              : ListView.builder(
-            itemCount:
-            controller.producvtList.length > 10
-                ? 10
-                : controller.producvtList.length,
-            padding: EdgeInsets.symmetric(horizontal: 14),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              ProductModel productModel = controller.producvtList[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: FittedBox(
-                  child: ProductCard(productModel: productModel),
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CenterCircularIndicator(),
                 ),
+              )
+              : ListView.builder(
+                itemCount:
+                    controller.producvtList.length > 10
+                        ? 10
+                        : controller.producvtList.length,
+                padding: EdgeInsets.symmetric(horizontal: 14),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  ProductModel productModel = controller.producvtList[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: FittedBox(
+                      child: ProductCard(productModel: productModel),
+                    ),
+                  );
+                },
               );
-            },
-          );
         },
       ),
     );
   }
+
   SizedBox _buildPopularProductView() {
     return SizedBox(
       height: 190,
@@ -179,56 +179,56 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (controller) {
           return controller.inProgress
               ? Center(
-            child: SizedBox(
-              height: 40,
-              width: 40,
-              child: CenterCircularIndicator(),
-            ),
-          )
-              : ListView.builder(
-            itemCount:
-            controller.producvtList.length > 10
-                ? 10
-                : controller.producvtList.length,
-            padding: EdgeInsets.symmetric(horizontal: 14),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              ProductModel productModel = controller.producvtList[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: FittedBox(
-                  child: ProductCard(productModel: productModel),
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CenterCircularIndicator(),
                 ),
+              )
+              : ListView.builder(
+                itemCount:
+                    controller.producvtList.length > 10
+                        ? 10
+                        : controller.producvtList.length,
+                padding: EdgeInsets.symmetric(horizontal: 14),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  ProductModel productModel = controller.producvtList[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: FittedBox(
+                      child: ProductCard(productModel: productModel),
+                    ),
+                  );
+                },
               );
-            },
-          );
         },
       ),
     );
   }
 
-
   Widget _buildCategoriesSection() {
-    return  GetBuilder<CategoryController>(
+    return GetBuilder<CategoryController>(
       builder: (controller) {
-        if(controller.isInitialLoading){
-          return SizedBox(
-              height: 100,
-              child: CenterCircularIndicator());
+        if (controller.isInitialLoading) {
+          return SizedBox(height: 100, child: CenterCircularIndicator());
         }
 
-        List <CategoryModel> list = controller.categoryList.length>10?
-            controller.categoryList.sublist(0,10):controller.categoryList;
+        List<CategoryModel> list =
+            controller.categoryList.length > 10
+                ? controller.categoryList.sublist(0, 10)
+                : controller.categoryList;
 
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children:list.map((e){
-              return CategoryItem(categoryModel: e);
-            }).toList(),
+            children:
+                list.map((e) {
+                  return CategoryItem(categoryModel: e);
+                }).toList(),
           ),
         );
-      }
+      },
     );
   }
 
@@ -240,15 +240,9 @@ class _HomeScreenState extends State<HomeScreen> {
         filled: true,
         hintText: 'Search',
         prefixIcon: const Icon(Icons.search),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
+        enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: const OutlineInputBorder(borderSide: BorderSide.none),
       ),
     );
   }
@@ -257,15 +251,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       title: Image.asset(AssetPath.appLogoPng, height: 30, width: 30),
       actions: [
-        AppBarActionButton(
-          icon: Icons.person_outline,
-          onTap: () {},
-        ),
+        AppBarActionButton(icon: Icons.person_outline, onTap: () {}),
         const SizedBox(width: 8),
-        AppBarActionButton(
-          icon: Icons.call,
-          onTap: () {},
-        ),
+        AppBarActionButton(icon: Icons.call, onTap: () {}),
         const SizedBox(width: 8),
         AppBarActionButton(
           icon: Icons.notifications_active_outlined,

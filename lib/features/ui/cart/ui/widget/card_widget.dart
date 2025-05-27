@@ -1,12 +1,8 @@
-
 import 'package:crafty_bay/app/utils/asset_path.dart';
 import 'package:crafty_bay/core/widgets/show_snack_Bar.dart';
-import 'package:crafty_bay/features/ui/screens/product/widgets/increment_decrement_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../../app/utils/constants/color.dart';
-
 import '../../model/cart_model.dart';
 import '../controller/product_cart_controller.dart';
 import 'increment_decrement_counter_widget.dart';
@@ -26,9 +22,7 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-
   bool _deleteInProgress = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +60,15 @@ class _CardWidgetState extends State<CardWidget> {
                 ),
                 Row(
                   children: [
-                    Text('Color: ${widget.cardModel.color}', style: TextStyle(fontSize: 10)),
+                    Text(
+                      'Color: ${widget.cardModel.color}',
+                      style: TextStyle(fontSize: 10),
+                    ),
                     SizedBox(width: 8),
-                    Text('Size: ${widget.cardModel.size}', style: TextStyle(fontSize: 10)),
+                    Text(
+                      'Size: ${widget.cardModel.size}',
+                      style: TextStyle(fontSize: 10),
+                    ),
                   ],
                 ),
               ],
@@ -93,10 +93,10 @@ class _CardWidgetState extends State<CardWidget> {
                   );
                 }
               },
-              icon: const Icon(Icons.delete_outline,color: Colors.grey,),
+              icon: const Icon(Icons.delete_outline, color: Colors.grey),
             ),
           ),
-          SizedBox(height: 8)
+          SizedBox(height: 8),
         ],
       ),
       subtitle: Row(
@@ -112,7 +112,7 @@ class _CardWidgetState extends State<CardWidget> {
           ),
 
           IncrementDecrementCountWidget(
-            count: widget.cardModel.quantity??0,
+            count: widget.cardModel.quantity ?? 0,
             quantity: (count) {
               widget.quantity(count);
             },
