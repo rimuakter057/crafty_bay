@@ -1,16 +1,38 @@
-# crafty_bay
+# E-Commerce App 📖
 
-A new Flutter project.
+## 🖼 App Screenshots
 
-## Getting Started
+### 🔹 Row 1
+<p float="left">
+  <img src="assets/images/screenshots/sign_in.jpg" width="200"/>
+  <img src="assets/images/screenshots/signup.jpg" width="200"/>
+  <img src="assets/images/screenshots/otp.jpg" width="200"/>
+  <img src="assets/images/screenshots/home.jpg" width="200"/>
+</p>
+### 🔹 Row 2
+<p float="left">
+  <img src="assets/images/screenshots/home1.jpg" width="200"/>
+  <img src="assets/images/screenshots/product_details.jpg" width="200"/>
+  <img src="assets/images/screenshots/item_list.jpg" width="200"/>
+  <img src="assets/images/screenshots/review_add.jpg" width="200"/>
+</p>
 
-This project is a starting point for a Flutter application.
+### 🔹 Row 3
+<p float="left">
+  <img src="assets/images/screenshots/review_list.jpg" width="200"/>
+  <img src="assets/images/screenshots/wish_list.jpg" width="200"/>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Technologies Used
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app is built with the following technologies:
+
+- 🔹 **Flutter** (UI development)
+- 🔹 **Dart** (Programming Language)
+- 🔹 **Getx** (State Management and Navigation)
+- 🔹 **Rest API** (For fetching and updating data)
+- 🔹 **Model Lists** (For organizing data)
+- 🔹 **Responsive UI** (Supports multiple screen sizes)
+- 🔹 **Reusable UI Components** (Modular UI elements for consistency)
+---
